@@ -8,9 +8,9 @@ public class CastCommand : ICommand
 {
     // The CastCommand takes in a casting unit and a spell name.  If the unit is a caster, it will cast the spell.
 
-    private readonly IEntity _unit;
+    private readonly IUnit _unit;
     private readonly string _spellName;
-    public CastCommand(IEntity unit, string spellName)
+    public CastCommand(IUnit unit, string spellName)
     {
         _unit = unit;
         _spellName = spellName;

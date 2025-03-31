@@ -7,9 +7,9 @@ public interface IRoom
 {
     string Name { get; set; }
     string Description { get; set; }
-    List<IEntity>? Units { get; set; }
+    List<IUnit>? Units { get; set; }
     Dictionary<Direction, IRoom> AdjacentRooms { get; set; }
-    void OnRoomEnter(IEntity unit);
+    void OnRoomEnter(IUnit unit);
     void AddAdjacentRoom(Direction direction, IRoom room);
 
 }

@@ -16,7 +16,7 @@ public class CommandHandler
     {
         _userInterface = userInterface;
     }
-    public void HandleCommand(ICommand command, IEntity unit)
+    public void HandleCommand(ICommand command, IUnit unit)
 	{
         // If the unit is able to move, the unit moves.
         if (command.GetType() == typeof(MoveCommand))
@@ -51,7 +51,7 @@ public class CommandHandler
                                 unit.UseItem(item);
                                 break;
                             case TradeItemCommand:
-                                IEntity tradeTarget = _userInterface.UnitSelectionMenu.Display($"Select unit to trade {item} to.", "[[Go Back]]");
+                                IUnit tradeTarget = _userInterface.UnitSelectionMenu.Display($"Select unit to trade {item} to.", "[[Go Back]]");
                                 unit.TradeItem(item, tradeTarget);
                                 break;
                             case DropItemCommand:
@@ -73,7 +73,7 @@ public class CommandHandler
         {
             if (unit is IAttack)
             {
-                IEntity targetUnit = _userInterface.UnitSelectionMenu.Display($"Select unit being attacked by {unit.Name}", "[[Go Back]]");
+                IUnit targetUnit = _userInterface.UnitSelectionMenu.Display($"Select unit being attacked by {unit.Name}", "[[Go Back]]");
                 if (targetUnit != null)
                 {
                     unit.Attack(targetUnit);
@@ -83,7 +83,7 @@ public class CommandHandler
         // If the unit is able to heal, it heals.
         else if (command.GetType() == typeof(HealCommand))
         {
-            IEntity targetUnit = _userInterface.UnitSelectionMenu.Display($"Select unit being healed by {unit.Name}", "[[Go Back]]");
+            IUnit targetUnit = _userInterface.UnitSelectionMenu.Display($"Select unit being healed by {unit.Name}", "[[Go Back]]");
             if (targetUnit != null)
             {
                 ((IHeal)unit).Heal(targetUnit);

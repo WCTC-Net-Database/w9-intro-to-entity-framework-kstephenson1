@@ -11,5 +11,5 @@ public interface IShootable
     // Interface tha allows units to shoot.
     CommandInvoker Invoker { set; get; }
     ShootCommand ShootCommand { set; get; }
-    void Shoot(IEntity target);
+    void Shoot(IUnit target);
 }

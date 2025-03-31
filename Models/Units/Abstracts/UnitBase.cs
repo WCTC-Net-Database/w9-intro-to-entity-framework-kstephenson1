@@ -15,7 +15,7 @@ using w9_assignment_ksteph.Models.Inventories;
 
 namespace w9_assignment_ksteph.Models.Units.Abstracts;
 
-public abstract class UnitBase : IEntity, ITargetable, IAttack, IHaveInventory
+public abstract class UnitBase : IUnit, ITargetable, IAttack, IHaveInventory
 {
     // Unit is an abstract class that holds basic unit properties and functions.
 
@@ -99,7 +99,7 @@ public abstract class UnitBase : IEntity, ITargetable, IAttack, IHaveInventory
     }
 
     // Attacks the target unit.
-    public virtual void Attack(IEntity target)
+    public virtual void Attack(IUnit target)
     {
         AttackCommand = new(this, target);
         Invoker.ExecuteCommand(AttackCommand);
@@ -187,7 +187,7 @@ public abstract class UnitBase : IEntity, ITargetable, IAttack, IHaveInventory
         Invoker.ExecuteCommand(DropItemCommand);
     }
 
-    public void TradeItem(IItem item, IEntity target)
+    public void TradeItem(IItem item, IUnit target)
     {
         TradeItemCommand = new(this, item, target);
         Invoker.ExecuteCommand(TradeItemCommand);

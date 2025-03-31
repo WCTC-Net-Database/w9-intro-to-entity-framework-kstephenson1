@@ -1,8 +1,4 @@
-﻿using CsvHelper.Configuration.Attributes;
-using System.Runtime.CompilerServices;
-using System.Text.Json.Serialization;
-using w9_assignment_ksteph.DataTypes;
-using w9_assignment_ksteph.DataTypes.Structs;
+﻿using w9_assignment_ksteph.DataTypes.Structs;
 using w9_assignment_ksteph.Models.Combat;
 using w9_assignment_ksteph.Models.Commands.UnitCommands;
 using w9_assignment_ksteph.Models.Interfaces.InventoryBehaviors;
@@ -11,7 +7,7 @@ using w9_assignment_ksteph.Models.Interfaces.UnitBehaviors;
 
 namespace w9_assignment_ksteph.Models.Interfaces;
 
-public interface IEntity : ITargetable, IAttack, IHaveInventory, IUseItems
+public interface IUnit : ITargetable, IAttack, IHaveInventory, IUseItems
 {
     // Interface tha allows units to exist.
     MoveCommand MoveCommand { set; get; }

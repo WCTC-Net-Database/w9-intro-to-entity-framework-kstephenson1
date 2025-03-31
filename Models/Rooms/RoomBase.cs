@@ -8,7 +8,7 @@ public abstract class RoomBase : IRoom
 {
     public string Name { get; set; }
     public string Description { get; set; }
-    public List<IEntity>? Units { get; set; } = new();
+    public List<IUnit>? Units { get; set; } = new();
     public Dictionary<Direction, IRoom> AdjacentRooms { get; set; } = new();
 
     protected RoomBase(string name, string description)
@@ -17,7 +17,7 @@ public abstract class RoomBase : IRoom
         Description = description;
     }
 
-    public void OnRoomEnter(IEntity unit)
+    public void OnRoomEnter(IUnit unit)
     {
         Console.WriteLine($"{unit.Name} entered {Description}");
         unit.CurrentRoom.Units.Remove(unit);

@@ -10,5 +10,5 @@ public interface IHeal
     CommandInvoker Invoker { set; get; }
     HealCommand HealCommand { set; get; }
 
-    void Heal(IEntity target);
+    void Heal(IUnit target);
 }

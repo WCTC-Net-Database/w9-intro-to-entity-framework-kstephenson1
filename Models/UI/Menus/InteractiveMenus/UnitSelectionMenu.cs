@@ -3,7 +3,7 @@ using w9_assignment_ksteph.Services;
 
 namespace w9_assignment_ksteph.Models.UI.Menus.InteractiveMenus;
 
-public class UnitSelectionMenu : InteractiveSelectionMenu<IEntity>
+public class UnitSelectionMenu : InteractiveSelectionMenu<IUnit>
 {
 
     // The MainMenu contains items that have 4 parts, the index, the name, the description, and the action that
@@ -16,9 +16,9 @@ public class UnitSelectionMenu : InteractiveSelectionMenu<IEntity>
         _unitManager = unitManager;
     }
 
-    public override IEntity Display(string prompt, string exitMessage   )
+    public override IUnit Display(string prompt, string exitMessage   )
     {
-        IEntity selection = default!;
+        IUnit selection = default!;
         bool exit = false;
         while (exit != true)
         {
@@ -38,7 +38,7 @@ public class UnitSelectionMenu : InteractiveSelectionMenu<IEntity>
         _menuItems = new();
 
         // Adds all the characters to the unit list using green letters.
-        foreach (IEntity unit in _unitManager.Characters.Units)
+        foreach (IUnit unit in _unitManager.Characters.Units)
         {
             // Strikethrough and dim the unit info if the unit is not alive.
             if (unit.Stats.HitPoints <= 0)
@@ -51,7 +51,7 @@ public class UnitSelectionMenu : InteractiveSelectionMenu<IEntity>
             }
         }
         // Adds all the monsters to the unit list using red letters.
-        foreach (IEntity unit in _unitManager.Monsters.Units)
+        foreach (IUnit unit in _unitManager.Monsters.Units)
         {
             if (unit.Stats.HitPoints <= 0)
             {

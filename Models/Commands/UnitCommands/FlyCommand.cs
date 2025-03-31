@@ -10,9 +10,9 @@ public class FlyCommand : ICommand
 {
     // FlyCommand takes in a unit and a position, checks to see if the unit is able to fly, then flies to the position if able.
 
-    private readonly IEntity _unit;
+    private readonly IUnit _unit;
     private Position _position;
-    public FlyCommand(IEntity unit)
+    public FlyCommand(IUnit unit)
     {
         _unit = unit;
     }

@@ -26,7 +26,7 @@ public class CommandMenu : InteractiveSelectionMenu<ICommand>
         throw new ArgumentException("CommandMenu(unit, prompt) requires a unit.");
     }
 
-    public ICommand Display(IEntity unit, string prompt, string exitMessage)
+    public ICommand Display(IUnit unit, string prompt, string exitMessage)
     {
         ICommand selection = default!;
         bool exit = false;
@@ -48,7 +48,7 @@ public class CommandMenu : InteractiveSelectionMenu<ICommand>
         throw new ArgumentException("Update(unit) requires a unit.");
     }
 
-    public void Update(IEntity unit, string exitMessage)
+    public void Update(IUnit unit, string exitMessage)
     {
         _menuItems = new();
 

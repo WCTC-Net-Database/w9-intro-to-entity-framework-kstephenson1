@@ -15,5 +15,5 @@ public interface IHaveInventory
     TradeItemCommand TradeItemCommand { get; set; }
     Inventory Inventory { get; set; }
     void DropItem(IItem item);
-    void TradeItem(IItem item, IEntity target);
+    void TradeItem(IItem item, IUnit target);
 }

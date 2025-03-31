@@ -8,7 +8,7 @@ public class Inventory
 {
     // The Inventory class holds a list of items.
     [JsonIgnore]
-    public IEntity? Unit;
+    public IUnit? Unit;
     public List<IItem>? Items { get; set; } = new();
 
     public Inventory()

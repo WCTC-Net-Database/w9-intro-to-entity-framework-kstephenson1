@@ -6,6 +6,7 @@ using w9_assignment_ksteph.Models.UI.Menus;
 using w9_assignment_ksteph.Models.UI.Menus.InteractiveMenus;
 using w9_assignment_ksteph.Models.Units.Abstracts;
 using w9_assignment_ksteph.Services;
+using W9_assignment_template.Data;
 
 namespace w9_assignment_ksteph;
 
@@ -24,6 +25,7 @@ class Program
         services.AddTransient<DungeonFactory>();
         services.AddTransient<ExitMenu>();
         services.AddSingleton<FileManager<UnitBase>>();
+        services.AddDbContext<GameContext>();
         services.AddTransient<InventoryMenu>();
         services.AddTransient<ItemCommandMenu>();
         services.AddTransient<MainMenu>();
@@ -35,11 +37,12 @@ class Program
 
         ServiceProvider provider = services.BuildServiceProvider();
 
+        GameContext context = provider.GetRequiredService<GameContext>();
         UnitManager unitManager = provider.GetRequiredService<UnitManager>();
         UserInterface userInterface = provider.GetRequiredService<UserInterface>();
         DungeonFactory dungeonFactory = provider.GetRequiredService<DungeonFactory>();
 
-        GameEngine engine = new GameEngine(unitManager, userInterface, dungeonFactory);
+        GameEngine engine = new GameEngine(context, unitManager, userInterface, dungeonFactory);
         engine.StartGameEngine();
     }
 }

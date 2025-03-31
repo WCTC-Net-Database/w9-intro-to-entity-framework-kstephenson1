@@ -32,7 +32,7 @@ public class EnemyCleric : MonsterBase, ICleric
     [JsonIgnore]
     public CastCommand CastCommand { get; set; } = null!;
 
-    public void Heal(IEntity target)
+    public void Heal(IUnit target)
     {
         HealCommand = new(this, target);
         Invoker.ExecuteCommand(HealCommand);

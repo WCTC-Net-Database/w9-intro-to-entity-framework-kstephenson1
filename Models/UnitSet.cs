@@ -7,7 +7,7 @@ using w9_assignment_ksteph.Models.Interfaces;
 // UnitSet<Ttype> is a class contains a list of a generic type of unit and functions that point toward this generic unit type's
 // import and export methods.
 
-public class UnitSet<TUnit> where TUnit : IEntity
+public class UnitSet<TUnit> where TUnit : IUnit
 {
     public virtual List<TUnit> Units { get; set; } = new(); // A list of characters objects for reference
 

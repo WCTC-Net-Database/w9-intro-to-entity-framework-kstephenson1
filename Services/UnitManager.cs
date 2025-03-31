@@ -35,7 +35,7 @@ public class UnitManager
             }
         }
 
-        foreach (IEntity unit in Characters.Units)
+        foreach (IUnit unit in Characters.Units)
         {
             unit.Stats.MaxHitPoints = unit.Stats.HitPoints;
             unit.Inventory.Unit = unit;
@@ -45,7 +45,7 @@ public class UnitManager
             }
         }
 
-        foreach (IEntity unit in Monsters.Units)
+        foreach (IUnit unit in Monsters.Units)
         {
             unit.Stats.MaxHitPoints = unit.Stats.HitPoints;
         }

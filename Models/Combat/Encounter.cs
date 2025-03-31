@@ -13,13 +13,13 @@ public class Encounter
     private Random _generator = new Random();
     private Dictionary<Tuple<WeaponType, WeaponType>, int> dict = new();
     public int Roll;
-    public IEntity Unit { get; set; }
-    public IEntity Target { get; set; }
+    public IUnit Unit { get; set; }
+    public IUnit Target { get; set; }
     public int Damage => RollDamage();
     public IEquippableItem? UnitWeapon { get; set; }
     public IEquippableItem? TargetWeapon { get; set; }
 
-    public Encounter(IEntity unit, IEntity target)
+    public Encounter(IUnit unit, IUnit target)
     {
         Roll = _generator.Next(100) + 1;
         Unit = unit;
@@ -137,14 +137,14 @@ public class Encounter
         return Unit.Stats.Magic + weaponEfficiency * (UnitWeapon.Might + GetTriangleDamageModifier());
     }
 
-    public int GetPhysicalResiliance(IEntity unit)
+    public int GetPhysicalResiliance(IUnit unit)
     {
         // Physical Resiliance = unit's Defense stat
         int terrainBonus = 1; // for future implementation?
         return unit.Stats.Defense * terrainBonus;
     }
 
-    public int GetMagicResiliance(IEntity unit)
+    public int GetMagicResiliance(IUnit unit)
     {
         // Magic Resiliance = Resistance stat
         int terrainBonus = 1; // for future implementation?

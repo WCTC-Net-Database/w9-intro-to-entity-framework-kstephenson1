@@ -9,15 +9,15 @@ public class MoveCommand : ICommand
 {
     // The MoveCommand takes in a unit and a position, checks to see if the unit can move, then moves to that position of able.
 
-    private readonly IEntity _unit;
+    private readonly IUnit _unit;
     private Position _position;
-    public MoveCommand(IEntity unit)
+    public MoveCommand(IUnit unit)
     {
         _unit = unit;
     }
     public void Execute()
     {
-        if (_unit is IEntity)
+        if (_unit is IUnit)
         {
             int x = Input.GetInt("Enter target location's x-coordinate: ");
             int z = Input.GetInt("Enter target location's z-coordinate: ");

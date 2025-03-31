@@ -9,9 +9,9 @@ public class EquipCommand : ICommand
     // A generic attack command.  It takes in an attacking unit and a target, creates a new encounter object, and calculates whether or
     // not the unit hit/crit and calculates damage.  If the unit cannot attack, a message is provided to the user.
 
-    private readonly IEntity _unit;
+    private readonly IUnit _unit;
     private readonly IEquippableItem _item;
-    public EquipCommand(IEntity unit, IEquippableItem item)
+    public EquipCommand(IUnit unit, IEquippableItem item)
     {
         _unit = unit;
         _item = item;

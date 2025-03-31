@@ -29,11 +29,11 @@ public class EnemyArcher : MonsterBase, IArcher
     [JsonIgnore]
     public ShootCommand ShootCommand { get; set; }
 
-    public void Shoot(IEntity target)
+    public void Shoot(IUnit target)
     {
         ShootCommand = new(this, target);
         Invoker.ExecuteCommand(ShootCommand);
     }
 
-    public override void Attack(IEntity target) => Shoot(target);
+    public override void Attack(IUnit target) => Shoot(target);
 }

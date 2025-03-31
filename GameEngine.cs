@@ -1,16 +1,18 @@
 ﻿using w9_assignment_ksteph.Models.Dungeons;
 using w9_assignment_ksteph.Models.UI;
 using w9_assignment_ksteph.Services;
+using W9_assignment_template.Data;
 
 namespace w9_assignment_ksteph;
 
 public class GameEngine
 {
+    private GameContext _context;
     private DungeonFactory _dungeonFactory;
     private UnitManager _unitManager;
     private UserInterface _userInterface;
 
-    public GameEngine(UnitManager unitManager, UserInterface userInterface, DungeonFactory dungeonFactory)
+    public GameEngine(GameContext context, UnitManager unitManager, UserInterface userInterface, DungeonFactory dungeonFactory)
     {
         _dungeonFactory = dungeonFactory;
         _unitManager = unitManager;
