@@ -1,6 +1,7 @@
 ﻿using w9_assignment_ksteph.DataTypes;
 using w9_assignment_ksteph.Models.Dungeons;
 using w9_assignment_ksteph.Models.Interfaces.Rooms;
+using w9_assignment_ksteph.Models.Rooms;
 using w9_assignment_ksteph.Models.UI.Menus.InteractiveMenus;
 
 namespace w9_assignment_ksteph.Services;
@@ -21,19 +22,19 @@ public class DungeonFactory
         {
             case "intro":
                 Dungeon dungeon = new Dungeon(_roomNavigationMenu);
-                IRoom entrance = _roomFactory.CreateRoom("intro.entrance");
-                IRoom jail = _roomFactory.CreateRoom("intro.jail");
-                IRoom kitchen = _roomFactory.CreateRoom("intro.kitchen");
-                IRoom hallway = _roomFactory.CreateRoom("intro.hallway");
-                IRoom library = _roomFactory.CreateRoom("intro.entrance");
-                IRoom dwelling = _roomFactory.CreateRoom("intro.dwelling");
-                IRoom dwelling2 = _roomFactory.CreateRoom("intro.dwelling2");
-                entrance.AddAdjacentRoom(Direction.West, jail);
-                entrance.AddAdjacentRoom(Direction.East, kitchen);
-                entrance.AddAdjacentRoom(Direction.North, hallway);
-                hallway.AddAdjacentRoom(Direction.West, dwelling2);
-                hallway.AddAdjacentRoom(Direction.East, library);
-                hallway.AddAdjacentRoom(Direction.North, dwelling);
+                Room entrance = _roomFactory.CreateRoom("intro.entrance");
+                Room jail = _roomFactory.CreateRoom("intro.jail");
+                Room kitchen = _roomFactory.CreateRoom("intro.kitchen");
+                Room hallway = _roomFactory.CreateRoom("intro.hallway");
+                Room library = _roomFactory.CreateRoom("intro.entrance");
+                Room dwelling = _roomFactory.CreateRoom("intro.dwelling");
+                Room dwelling2 = _roomFactory.CreateRoom("intro.dwelling2");
+                entrance.AddAdjacentRoom(jail, Direction.West);
+                entrance.AddAdjacentRoom(kitchen, Direction.East);
+                entrance.AddAdjacentRoom(hallway, Direction.North);
+                hallway.AddAdjacentRoom(dwelling2, Direction.West);
+                hallway.AddAdjacentRoom(library, Direction.East);
+                hallway.AddAdjacentRoom(dwelling, Direction.North);
 
                 dungeon.StartingRoom = entrance;
                 return dungeon;

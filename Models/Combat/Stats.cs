@@ -2,10 +2,8 @@
 
 public class Stats
 {
-    public Stats()
-    {
-        
-    }
+    
+    public int StatsId { get; set; }
 
     // // // // // // // // // // // // // // // // //
     // Health                                       //
@@ -25,4 +23,8 @@ public class Stats
     public int Luck { get; set; }               // LCK
     public int Defense { get; set; }            // DEF
     public int Resistance { get; set; }         // RES
+    public Stats()
+    {
+
+    }
 }

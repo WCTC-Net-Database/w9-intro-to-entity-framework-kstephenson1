@@ -28,7 +28,7 @@ public class InventorySerializer
         foreach (string item in itemArray)
         {
             var convertedItem = ConvertToItem(item);
-            inventory.Items!.Add(convertedItem);
+            inventory.Items!.Add(convertedItem as Item);
         }
         return inventory;
     }
@@ -71,7 +71,12 @@ public class InventorySerializer
 
     private static List<IItem>? ToItemList(Inventory inventory)          // Converts Inventories to List<Item>
     {
-        return inventory.Items;
+        List<IItem?> items = new List<IItem?>();
+        foreach (IItem item in inventory.Items!)
+        {
+            items.Add(item);
+        }
+        return items;
     }
 
     private static IItem ConvertToItem(string itemString)

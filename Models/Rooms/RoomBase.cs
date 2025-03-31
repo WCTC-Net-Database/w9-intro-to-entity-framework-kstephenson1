@@ -1,15 +1,17 @@
 ﻿using w9_assignment_ksteph.DataTypes;
 using w9_assignment_ksteph.Models.Interfaces;
 using w9_assignment_ksteph.Models.Interfaces.Rooms;
+using w9_assignment_ksteph.Models.Units.Abstracts;
 
 namespace w9_assignment_ksteph.Models.Rooms;
 
 public abstract class RoomBase : IRoom
 {
+    public int RoomId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public List<IUnit>? Units { get; set; } = new();
-    public Dictionary<Direction, IRoom> AdjacentRooms { get; set; } = new();
+    public List<UnitBase>? Units { get; set; } = new();
+    public List<AdjacentRoom> AdjacentRooms { get; set; } = new();
 
     protected RoomBase(string name, string description)
     {
@@ -17,18 +19,18 @@ public abstract class RoomBase : IRoom
         Description = description;
     }
 
-    public void OnRoomEnter(IUnit unit)
+    public void OnRoomEnter(UnitBase unit)
     {
         Console.WriteLine($"{unit.Name} entered {Description}");
         unit.CurrentRoom.Units.Remove(unit);
-        unit.CurrentRoom = this;
+        unit.CurrentRoom = this as Room;
         Units.Add(unit);
     }
 
-    public void AddAdjacentRoom(Direction direction, IRoom room)
+    public void AddAdjacentRoom(Room room, Direction direction)
     {
-        AdjacentRooms.Add(direction, room);
-        room.AdjacentRooms.Add(GetOppositeDirection(direction), this);
+        AdjacentRooms.Add(new(room, direction));
+        room.AdjacentRooms.Add(new(this as Room, GetOppositeDirection(direction)));
     }
 
     private Direction GetOppositeDirection(Direction direction)

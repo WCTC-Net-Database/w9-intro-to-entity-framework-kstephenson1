@@ -5,7 +5,7 @@ namespace w9_assignment_ksteph.Services;
 
 public class RoomFactory
 {
-    public IRoom CreateRoom(string roomType)
+    public Room CreateRoom(string roomType)
     {
         return roomType switch
         {

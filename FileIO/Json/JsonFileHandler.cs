@@ -20,7 +20,6 @@ public class JsonFileHandler<T> : ICharacterIO, IItemIO
         _options.Converters.Add(new JsonInventoryConverter());      // Using a custom converter to convert json string -> Inventory
         _options.Converters.Add(new JsonUnitConverter());      // Using a custom converter to convert json string -> Inventory
 
-        _options.Converters.Add(new JsonPositionConverter());       // Using a custom converter to convert json string -> Position
         _options.Converters.Add(new JsonNumberEnumConverter<WeaponType>());       // Using a custom converter to convert json string -> Position
         _options.Converters.Add(new JsonStringEnumConverter());       // Using a custom converter to convert json string -> Position
         _options.WriteIndented = true;                              // Writes the json file in indented format.

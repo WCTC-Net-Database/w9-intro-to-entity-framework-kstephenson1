@@ -1,7 +1,5 @@
-﻿using CsvHelper.Configuration.Attributes;
-using System.Text.Json.Serialization;
-using w9_assignment_ksteph.DataTypes;
-using w9_assignment_ksteph.DataTypes.Structs;
+﻿using System.Text.Json.Serialization;
+using CsvHelper.Configuration.Attributes;
 using w9_assignment_ksteph.Models.Combat;
 using w9_assignment_ksteph.Models.Commands.UnitCommands;
 using w9_assignment_ksteph.Models.Interfaces.UnitClasses;
@@ -18,7 +16,7 @@ public class EnemyMage : MonsterBase, IMage
 
     }
 
-    public EnemyMage(string name, string characterClass, int level, int hitPoints, Inventory inventory, Position position, Stats stats)
+    public EnemyMage(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stats stats)
     {
 
     }

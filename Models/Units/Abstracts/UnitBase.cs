@@ -1,6 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using CsvHelper.Configuration.Attributes;
-using w9_assignment_ksteph.DataTypes.Structs;
 using w9_assignment_ksteph.FileIO.Csv.Converters;
 using w9_assignment_ksteph.Models.Combat;
 using w9_assignment_ksteph.Models.Commands.Invokers;
@@ -9,15 +9,16 @@ using w9_assignment_ksteph.Models.Commands.UnitCommands;
 using w9_assignment_ksteph.Models.Interfaces;
 using w9_assignment_ksteph.Models.Interfaces.InventoryBehaviors;
 using w9_assignment_ksteph.Models.Interfaces.ItemBehaviors;
-using w9_assignment_ksteph.Models.Interfaces.Rooms;
 using w9_assignment_ksteph.Models.Interfaces.UnitBehaviors;
 using w9_assignment_ksteph.Models.Inventories;
+using w9_assignment_ksteph.Models.Rooms;
 
 namespace w9_assignment_ksteph.Models.Units.Abstracts;
 
 public abstract class UnitBase : IUnit, ITargetable, IAttack, IHaveInventory
 {
     // Unit is an abstract class that holds basic unit properties and functions.
+    public int UnitId { get; set; }
 
     [Name("Name")]                                          // CsvHelper Attribute
     public virtual string Name { get; set; }
@@ -33,42 +34,43 @@ public abstract class UnitBase : IUnit, ITargetable, IAttack, IHaveInventory
     [TypeConverter(typeof(CsvInventoryConverter))]          // CsvHelper Attribute that helps CsvHelper import a new inventory object instead of a string.
     public virtual Inventory Inventory { get; set; } = new();
 
-    [Name("Position")]                                         // CsvHelper Attribute
-    [JsonPropertyName("Position")]                         // Json Atribute
-    [TypeConverter(typeof(CsvPositionConverter))]          // CsvHelper Attribute that helps CsvHelper import a new Position struct instead of a string.
+    [Ignore]
+    [JsonIgnore]
+    public Room? CurrentRoom { get; set; }
 
     [Ignore]
     [JsonIgnore]
-    public IRoom? CurrentRoom { get; set; }
-    public virtual Position Position { get; set; } = new();
-
-    [Ignore]
-    [JsonIgnore]
+    [NotMapped]
     public virtual CommandInvoker Invoker { get; set; } = new();
 
     [Ignore]
     [JsonIgnore]
+    [NotMapped]
     public virtual UseItemCommand UseItemCommand { get; set; } = null!;
 
     [Ignore]
     [JsonIgnore]
+    [NotMapped]
     public virtual EquipCommand EquipCommand { get; set; } = null!;
 
     [Ignore]
     [JsonIgnore]
-
+    [NotMapped]
     public virtual DropItemCommand DropItemCommand { get; set; } = null!;
 
     [Ignore]
     [JsonIgnore]
+    [NotMapped]
     public virtual TradeItemCommand TradeItemCommand { get; set; } = null!;
 
     [Ignore]
     [JsonIgnore]
+    [NotMapped]
     public virtual AttackCommand AttackCommand { get; set; } = null!;
 
     [Ignore]
     [JsonIgnore]
+    [NotMapped]
     public virtual MoveCommand MoveCommand { get; set; } = null!;
 
     public Stats Stats { get; set; } = null!;
@@ -87,13 +89,12 @@ public abstract class UnitBase : IUnit, ITargetable, IAttack, IHaveInventory
         Inventory.Unit = this;
     }
 
-    public UnitBase(string name, string characterClass, int level, Inventory inventory, Position position, Stats stats)
+    public UnitBase(string name, string characterClass, int level, Inventory inventory, Stats stats)
     {
         Name = name;
         Class = characterClass;
         Level = level;
         Inventory = inventory;
-        Position = position;
         Stats = stats;
         Inventory.Unit = this;
     }

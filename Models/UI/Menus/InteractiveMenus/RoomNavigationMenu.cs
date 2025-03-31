@@ -1,5 +1,6 @@
 ﻿using w9_assignment_ksteph.DataTypes;
 using w9_assignment_ksteph.Models.Interfaces.Rooms;
+using w9_assignment_ksteph.Models.Rooms;
 
 namespace w9_assignment_ksteph.Models.UI.Menus.InteractiveMenus;
 
@@ -40,9 +41,9 @@ public class RoomNavigationMenu : InteractiveSelectionMenu<IRoom>
     {
         _menuItems = new();
 
-        foreach (KeyValuePair<Direction, IRoom> keyValuePair in room.AdjacentRooms)
+        foreach (AdjacentRoom adjacentRoom in room.AdjacentRooms)
         {
-            AddMenuItem($"{keyValuePair.Key.ToString()}", $"{keyValuePair.Value.Name}", keyValuePair.Value);
+            AddMenuItem($"{adjacentRoom.Direction.ToString()}", $"{adjacentRoom.Room.Name}", adjacentRoom.Room);
         }
 
         AddMenuItem(exitMessage, "", null!);
