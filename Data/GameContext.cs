@@ -1,33 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using W9_assignment_template.Models;
+using w9_assignment_ksteph.Configuration;
+using w9_assignment_ksteph.Models.Dungeons;
+using w9_assignment_ksteph.Models.Rooms;
 
 namespace W9_assignment_template.Data;
 
 public class GameContext : DbContext
 {
+    public DbSet<Dungeon> Dungeons { get; set; }
     public DbSet<Room> Rooms { get; set; }
-    public DbSet<Character> Characters { get; set; }
+    //public DbSet<UnitBase> Characters { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=StartingEFCore;Trusted_Connection=True;");
-    }
-
-    // Seed Method
-    public void Seed()
-    {
-        if (!Rooms.Any())
-        {
-            var room1 = new Room { Name = "Entrance Hall", Description = "The main entry." };
-            var room2 = new Room { Name = "Treasure Room", Description = "A room filled with treasures." };
-
-            var character1 = new Character { Name = "Knight", Level = 1, Room = room1 };
-            var character2 = new Character { Name = "Wizard", Level = 2, Room = room2 };
-
-            Rooms.AddRange(room1, room2);
-            Characters.AddRange(character1, character2);
-
-            SaveChanges();
-        }
+        optionsBuilder.UseSqlServer($"Data Source={Config.SQL_SERVER_ADDRESS};Database={Config.SQL_DATABASE_NAME};User ID={Config.SQL_DATABASE_USERNAME};{MathF.Sqrt(Config.SQL_DATABASE_PASSWORD_ENCRYPTED)*5*2}");
     }
 }
