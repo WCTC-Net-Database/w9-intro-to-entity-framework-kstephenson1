@@ -1,0 +1,6 @@
+Name,Class,Level,HP,MaxHitPoints,Inventory,Position
+"John, Brave",Fighter,1,10,10,sword|shield|potion,"1,2"
+Jane,Wizard,2,6,6,staff|robe|book,"-1,3"
+"Bob, Sneaky",Rogue,3,8,8,dagger|lockpick|cloak,"2,3"
+Alice,Cleric,4,12,12,mace|armor|potion,"0,5"
+"Reginald III, Sir",Knight,5,20,20,sword|armor|horse,"-1,1"

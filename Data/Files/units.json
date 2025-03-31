@@ -1,0 +1,281 @@
+﻿[
+  {
+    "$type": "Characters.Fighter",
+    "Name": "John, Brave",
+    "Class": "Fighter",
+    "Level": 1,
+    "Inventory": [
+      "sword",
+      "shield",
+      "potion"
+    ],
+    "Position": {
+      "x": 1,
+      "z": 1
+    },
+    "Stats": {
+      "HitPoints": 28,
+      "MaxHitPoints": 28,
+      "Movement": 5,
+      "Constitution": 7,
+      "Strength": 10,
+      "Magic": 6,
+      "Dexterity": 7,
+      "Speed": 7,
+      "Luck": 8,
+      "Defense": 6,
+      "Resistance": 2
+    }
+  },
+  {
+    "$type": "Characters.Wizard",
+    "Name": "Jane",
+    "Class": "Wizard",
+    "Level": 2,
+    "Inventory": [
+      "book_decay",
+      "robe",
+      "staff"
+    ],
+    "Position": {
+      "x": -1,
+      "z": -3
+    },
+    "Stats": {
+      "HitPoints": 25,
+      "MaxHitPoints": 25,
+      "Movement": 5,
+      "Constitution": 4,
+      "Strength": 5,
+      "Magic": 11,
+      "Dexterity": 8,
+      "Speed": 7,
+      "Luck": 9,
+      "Defense": 3,
+      "Resistance": 5
+    }
+  },
+  {
+    "$type": "Characters.Rogue",
+    "Name": "Bob, Sneaky",
+    "Class": "Rogue",
+    "Level": 3,
+    "Inventory": [
+      "dagger",
+      "lockpick",
+      "cloak"
+    ],
+    "Position": {
+      "x": 2,
+      "z": 3
+    },
+    "Stats": {
+      "HitPoints": 26,
+      "MaxHitPoints": 26,
+      "Movement": 6,
+      "Constitution": 5,
+      "Strength": 8,
+      "Magic": 11,
+      "Dexterity": 8,
+      "Speed": 12,
+      "Luck": 12,
+      "Defense": 9,
+      "Resistance": 8
+    }
+  },
+  {
+    "$type": "Characters.Cleric",
+    "Name": "Alice",
+    "Class": "Cleric",
+    "Level": 4,
+    "Inventory": [
+      "book_smite",
+      "mace",
+      "armor",
+      "potion"
+    ],
+    "Position": {
+      "x": 0,
+      "z": 5
+    },
+    "Stats": {
+      "HitPoints": 27,
+      "MaxHitPoints": 27,
+      "Movement": 5,
+      "Constitution": 4,
+      "Strength": 7,
+      "Magic": 9,
+      "Dexterity": 7,
+      "Speed": 7,
+      "Luck": 10,
+      "Defense": 6,
+      "Resistance": 7
+    }
+  },
+  {
+    "$type": "Characters.Knight",
+    "Name": "Reginald III, Sir",
+    "Class": "Knight",
+    "Level": 5,
+    "Inventory": [
+      "sword",
+      "armor",
+      "horse"
+    ],
+    "Position": {
+      "x": -1,
+      "z": 1
+    },
+    "Stats": {
+      "HitPoints": 30,
+      "MaxHitPoints": 30,
+      "Movement": 4,
+      "Constitution": 10,
+      "Strength": 10,
+      "Magic": 9,
+      "Dexterity": 7,
+      "Speed": 5,
+      "Luck": 10,
+      "Defense": 13,
+      "Resistance": 5
+    }
+  },
+  {
+    "$type": "Monsters.EnemyGhost",
+    "Name": "Poltergeist",
+    "Class": "Ghost",
+    "Level": 1,
+    "Inventory": [
+      "ghostly_axe"
+    ],
+    "Equipment": [],
+    "Position": {
+      "x": 6,
+      "y": 6
+    },
+    "Stats": {
+      "HitPoints": 25,
+      "MaxHitPoints": 25,
+      "Movement": 5,
+      "Constitution": 3,
+      "Strength": 8,
+      "Magic": 6,
+      "Dexterity": 7,
+      "Speed": 8,
+      "Luck": 8,
+      "Defense": 5,
+      "Resistance": 4
+    }
+  },
+  {
+    "$type": "Monsters.EnemyGoblin",
+    "Name": "Ruthless Treasure-Gather",
+    "Class": "Goblin",
+    "Level": 2,
+    "Inventory": [
+      "sword"
+    ],
+    "Equipment": [],
+    "Position": {
+      "x": 5,
+      "y": 7
+    },
+    "Stats": {
+      "HitPoints": 28,
+      "MaxHitPoints": 28,
+      "Movement": 5,
+      "Constitution": 5,
+      "Strength": 9,
+      "Magic": 7,
+      "Dexterity": 7,
+      "Speed": 8,
+      "Luck": 9,
+      "Defense": 6,
+      "Resistance": 2
+    }
+  },
+  {
+    "$type": "Monsters.EnemyArcher",
+    "Name": "Sniper",
+    "Class": "Archer",
+    "Level": 3,
+    "Inventory": [
+      "bow"
+    ],
+    "Equipment": [],
+    "Position": {
+      "x": 4,
+      "y": 4
+    },
+    "Stats": {
+      "HitPoints": 27,
+      "MaxHitPoints": 27,
+      "Movement": 5,
+      "Constitution": 6,
+      "Strength": 9,
+      "Magic": 7,
+      "Dexterity": 7,
+      "Speed": 8,
+      "Luck": 9,
+      "Defense": 6,
+      "Resistance": 2
+    }
+  },
+  {
+    "$type": "Monsters.EnemyMage",
+    "Name": "Studious Spellcaster",
+    "Class": "Mage",
+    "Level": 4,
+    "Inventory": [
+      "book_lightning",
+      "potion"
+    ],
+    "Equipment": [],
+    "Position": {
+      "x": 9,
+      "y": 3
+    },
+    "Stats": {
+      "HitPoints": 26,
+      "MaxHitPoints": 26,
+      "Movement": 5,
+      "Constitution": 4,
+      "Strength": 6,
+      "Magic": 10,
+      "Dexterity": 8,
+      "Speed": 9,
+      "Luck": 9,
+      "Defense": 6,
+      "Resistance": 7
+    }
+  },
+  {
+    "$type": "Monsters.EnemyCleric",
+    "Name": "Doctor of the Fallen",
+    "Class": "Cleric",
+    "Level": 5,
+    "Inventory": [
+      "book_smite",
+      "potion",
+      "mace"
+    ],
+    "Equipment": [],
+    "Position": {
+      "x": 0,
+      "y": 1
+    },
+    "Stats": {
+      "HitPoints": 29,
+      "MaxHitPoints": 29,
+      "Movement": 5,
+      "Constitution": 4,
+      "Strength": 8,
+      "Magic": 11,
+      "Dexterity": 8,
+      "Speed": 8,
+      "Luck": 8,
+      "Defense": 7,
+      "Resistance": 6
+    }
+  }
+]

@@ -1,0 +1,87 @@
+﻿[
+  {
+    "$type": "Characters.Fighter",
+    "Name": "John, Brave",
+    "Class": "Fighter",
+    "Level": 1,
+    "HP": 10,
+    "MaxHitPoints": 10,
+    "Inventory": [
+      "sword",
+      "shield",
+      "potion"
+    ],
+    "Position": {
+      "x": 1,
+      "z": 1
+    }
+  },
+  {
+    "$type": "Characters.Wizard",
+    "Name": "Jane",
+    "Class": "Wizard",
+    "Level": 2,
+    "HP": 6,
+    "MaxHitPoints": 6,
+    "Inventory": [
+      "staff",
+      "robe",
+      "book"
+    ],
+    "Position": {
+      "x": -1,
+      "z": -3
+    }
+  },
+  {
+    "$type": "Characters.Rogue",
+    "Name": "Bob, Sneaky",
+    "Class": "Rogue",
+    "Level": 3,
+    "HP": 8,
+    "MaxHitPoints": 8,
+    "Inventory": [
+      "dagger",
+      "lockpick",
+      "cloak"
+    ],
+    "Position": {
+      "x": 2,
+      "z": 3
+    }
+  },
+  {
+    "$type": "Characters.Cleric",
+    "Name": "Alice",
+    "Class": "Cleric",
+    "Level": 4,
+    "HP": 12,
+    "MaxHitPoints": 12,
+    "Inventory": [
+      "mace",
+      "armor",
+      "potion"
+    ],
+    "Position": {
+      "x": 0,
+      "z": 5
+    }
+  },
+  {
+    "$type": "Characters.Knight",
+    "Name": "Reginald III, Sir",
+    "Class": "Knight",
+    "Level": 5,
+    "HP": 20,
+    "MaxHitPoints": 20,
+    "Inventory": [
+      "sword",
+      "armor",
+      "horse"
+    ],
+    "Position": {
+      "x": -1,
+      "z": 1
+    }
+  }
+]
