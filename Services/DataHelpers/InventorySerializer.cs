@@ -38,7 +38,7 @@ public class InventorySerializer
         List<string> itemArray = new();
         foreach (IItem item in inventory.Items!)
         {
-            itemArray.Add(item.ID);
+            itemArray.Add(StringHelper.ToItemIdFormat(item.Name));
         }
         return itemArray;
     }
@@ -60,9 +60,9 @@ public class InventorySerializer
             foreach (IItem item in items)
             {
                 if (inventory == "")
-                    inventory += StringHelper.ToItemIdFormat(item.ID);
+                    inventory += StringHelper.ToItemIdFormat(item.Name);
                 else
-                    inventory += "|" + StringHelper.ToItemIdFormat(item.ID);
+                    inventory += "|" + StringHelper.ToItemIdFormat(item.Name);
             }
 
             return inventory;

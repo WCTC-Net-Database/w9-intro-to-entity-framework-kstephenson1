@@ -9,8 +9,8 @@ public class ItemLockpick : Item, IConsumableItem
     public int UsesLeft { get; set; }
     public ItemLockpick()
     {
-        ID = "lockpick";
-        Name = StringHelper.ToItemNameFormat(ID);
+        string oldId = "lockpick";
+        Name = StringHelper.ToItemNameFormat(oldId);
         Description = "Use to unlock a nearby door or chest.";
         UsesLeft = MaxUses;
     }

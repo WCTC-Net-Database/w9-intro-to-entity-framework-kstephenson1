@@ -41,10 +41,10 @@ public class RoomNavigationMenu : InteractiveSelectionMenu<IRoom>
     {
         _menuItems = new();
 
-        foreach (AdjacentRoom adjacentRoom in room.AdjacentRooms)
-        {
-            AddMenuItem($"{adjacentRoom.Direction.ToString()}", $"{adjacentRoom.Room.Name}", adjacentRoom.Room);
-        }
+        //foreach (AdjacentRoom adjacentRoom in room.AdjacentRooms)
+        //{
+        //    AddMenuItem($"{adjacentRoom.Direction.ToString()}", $"{adjacentRoom.Adjacent.Name}", adjacentRoom.Adjacent);
+        //}
 
         AddMenuItem(exitMessage, "", null!);
     }

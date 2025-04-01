@@ -1,6 +1,6 @@
 ﻿namespace w9_assignment_ksteph.Models.Units.Abstracts;
 // The character class stores information for each character.
-public abstract class CharacterBase : UnitBase
+public abstract class CharacterBase : Unit
 {
 
     public override string ToString()

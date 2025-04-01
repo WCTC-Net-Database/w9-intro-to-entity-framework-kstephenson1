@@ -1,5 +1,9 @@
-﻿using w9_assignment_ksteph.Models.Dungeons;
+﻿using w9_assignment_ksteph.DataTypes;
+using w9_assignment_ksteph.Models.Dungeons;
+using w9_assignment_ksteph.Models.Rooms;
 using w9_assignment_ksteph.Models.UI;
+using w9_assignment_ksteph.Models.UI.Menus.InteractiveMenus;
+using w9_assignment_ksteph.Models.Units.Abstracts;
 using w9_assignment_ksteph.Services;
 using W9_assignment_template.Data;
 
@@ -7,13 +11,14 @@ namespace w9_assignment_ksteph;
 
 public class GameEngine
 {
-    private GameContext _context;
+    private GameContext _db;
     private DungeonFactory _dungeonFactory;
     private UnitManager _unitManager;
     private UserInterface _userInterface;
 
-    public GameEngine(GameContext context, UnitManager unitManager, UserInterface userInterface, DungeonFactory dungeonFactory)
+    public GameEngine(GameContext db, UnitManager unitManager, UserInterface userInterface, DungeonFactory dungeonFactory)
     {
+        _db = db;
         _dungeonFactory = dungeonFactory;
         _unitManager = unitManager;
         _userInterface = userInterface;
@@ -22,14 +27,36 @@ public class GameEngine
     public void StartGameEngine()
     {
         Initialization();
-        Run();
         Test();
+        Run();
         End();
     }
 
     void Test()
-    {
+    {                                    //
+        Dungeon dungeon = new Dungeon();
+        dungeon.Name = "Intro Dungeon";
+        dungeon.Description = "The first dungeon in the game";
+        RoomFactory factory = new();
+        Room entrance = factory.CreateRoom("intro.entrance");
+        Room jail = factory.CreateRoom("intro.jail");
+        Room kitchen = factory.CreateRoom("intro.kitchen");
+        Room hallway = factory.CreateRoom("intro.hallway");
+        Room library = factory.CreateRoom("intro.entrance");
+        Room dwelling = factory.CreateRoom("intro.dwelling");
+        Room dwelling2 = factory.CreateRoom("intro.dwelling2");
+        entrance.AddAdjacentRoom(jail, Direction.West);
+        entrance.AddAdjacentRoom(kitchen, Direction.East);
+        entrance.AddAdjacentRoom(hallway, Direction.North);
+        hallway.AddAdjacentRoom(dwelling2, Direction.West);
+        hallway.AddAdjacentRoom(library, Direction.East);
+        hallway.AddAdjacentRoom(dwelling, Direction.North);
 
+        dungeon.StartingRoom = entrance;
+
+ 
+
+        //_db.SaveChanges();
     }
 
     public void Initialization()

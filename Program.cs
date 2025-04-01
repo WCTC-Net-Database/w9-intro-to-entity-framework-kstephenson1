@@ -24,7 +24,7 @@ class Program
         services.AddTransient<CommandMenu>();
         services.AddTransient<DungeonFactory>();
         services.AddTransient<ExitMenu>();
-        services.AddSingleton<FileManager<UnitBase>>();
+        services.AddSingleton<FileManager<Unit>>();
         services.AddDbContext<GameContext>();
         services.AddTransient<InventoryMenu>();
         services.AddTransient<ItemCommandMenu>();
@@ -37,12 +37,12 @@ class Program
 
         ServiceProvider provider = services.BuildServiceProvider();
 
-        GameContext context = provider.GetRequiredService<GameContext>();
+        GameContext db = provider.GetRequiredService<GameContext>();
         UnitManager unitManager = provider.GetRequiredService<UnitManager>();
         UserInterface userInterface = provider.GetRequiredService<UserInterface>();
         DungeonFactory dungeonFactory = provider.GetRequiredService<DungeonFactory>();
 
-        GameEngine engine = new GameEngine(context, unitManager, userInterface, dungeonFactory);
+        GameEngine engine = new GameEngine(db, unitManager, userInterface, dungeonFactory);
         engine.StartGameEngine();
     }
 }

@@ -10,8 +10,8 @@ public class MainMenu : InteractiveMenu
     // The MainMenu contains items that have 4 parts, the index, the name, the description, and the action that
     // is completed when that menu item is chosen.  It loops until the menu is exited.
     private CharacterUtilities _characterUtilities;
-    private FileManager<UnitBase> _unitFileManager;
-    public MainMenu(CharacterUtilities characterUtilities, FileManager<UnitBase> unitFileManager)
+    private FileManager<Unit> _unitFileManager;
+    public MainMenu(CharacterUtilities characterUtilities, FileManager<Unit> unitFileManager)
     {
         _characterUtilities = characterUtilities;
         _unitFileManager = unitFileManager;

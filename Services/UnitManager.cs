@@ -8,11 +8,11 @@ namespace w9_assignment_ksteph.Services;
 public class UnitManager
 {
     // The UnitManager class is a static class that holds lists of units for reference.
-    private FileManager<UnitBase> _unitFileManager;
+    private FileManager<Unit> _unitFileManager;
     public UnitSet<CharacterBase> Characters { get; private set; } = new();
     public UnitSet<MonsterBase> Monsters { get; private set; } = new();
 
-    public UnitManager(FileManager<UnitBase> unitFileManager)
+    public UnitManager(FileManager<Unit> unitFileManager)
     {
         _unitFileManager = unitFileManager;
     }
@@ -20,9 +20,9 @@ public class UnitManager
 
     public void ImportUnits()                           //Imports the characters from the csv file and stores them.
     {
-        List<UnitBase> importedUnits = _unitFileManager.Import<UnitBase>();
+        List<Unit> importedUnits = _unitFileManager.Import<Unit>();
 
-        foreach (UnitBase unit in importedUnits)
+        foreach (Unit unit in importedUnits)
         {
             if (unit is CharacterBase character)
             {
@@ -53,8 +53,8 @@ public class UnitManager
 
     public void ExportUnits()                           //Exports the stored characters into the specified csv file
     {
-        List<UnitBase> unitList = new();
-        foreach (UnitBase character in Characters.Units)
+        List<Unit> unitList = new();
+        foreach (Unit character in Characters.Units)
         {
             unitList.Add(character);
         }

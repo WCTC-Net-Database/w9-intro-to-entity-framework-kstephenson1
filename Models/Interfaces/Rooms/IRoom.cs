@@ -9,9 +9,9 @@ public interface IRoom
 {
     string Name { get; set; }
     string Description { get; set; }
-    List<UnitBase>? Units { get; set; }
-    List<AdjacentRoom> AdjacentRooms { get; set; }
-    void OnRoomEnter(UnitBase unit);
+    List<Unit>? Units { get; set; }
+    //List<AdjacentRoom> AdjacentRooms { get; set; }
+    void OnRoomEnter(Unit unit);
     void AddAdjacentRoom(Room room, Direction direction);
 
 }

@@ -9,8 +9,8 @@ public class ItemBook : Item, IConsumableItem
     public int UsesLeft { get; set; }
     public ItemBook()
     {
-        ID = "book";
-        Name = StringHelper.ToItemNameFormat(ID);
+        string oldId = "book";
+        Name = StringHelper.ToItemNameFormat(oldId);
         Description = "Use to read book.";
         UsesLeft = MaxUses;
     }

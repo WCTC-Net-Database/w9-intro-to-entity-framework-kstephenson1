@@ -6,9 +6,9 @@ using w9_assignment_ksteph.Services.DataHelpers;
 namespace w9_assignment_ksteph.FileIO.Json.Converters;
 
 // The JsonInventoryConverter is used to turn json format into an Inventories Object automatically.
-public class JsonUnitConverter : JsonConverter<UnitBase>
+public class JsonUnitConverter : JsonConverter<Unit>
 {
-    public override UnitBase? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Unit? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         using (JsonDocument jsonDocument = JsonDocument.ParseValue(ref reader))
         {
@@ -20,11 +20,11 @@ public class JsonUnitConverter : JsonConverter<UnitBase>
             Type unitType = UnitClassSerializer.Deserialize(typeProperty);
             
 
-            return (UnitBase)JsonSerializer.Deserialize(rootElement.GetRawText(), unitType, options);
+            return (Unit)JsonSerializer.Deserialize(rootElement.GetRawText(), unitType, options);
         }
     }
 
-    public override void Write(Utf8JsonWriter writer, UnitBase unit, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, Unit unit, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(writer, (object)unit, options);
     }

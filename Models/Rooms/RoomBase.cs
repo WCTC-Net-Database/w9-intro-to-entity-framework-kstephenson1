@@ -10,8 +10,8 @@ public abstract class RoomBase : IRoom
     public int RoomId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public List<UnitBase>? Units { get; set; } = new();
-    public List<AdjacentRoom> AdjacentRooms { get; set; } = new();
+    public List<Unit>? Units { get; set; } = new();
+    //public List<AdjacentRoom> AdjacentRooms { get; set; } = new();
 
     protected RoomBase(string name, string description)
     {
@@ -19,7 +19,7 @@ public abstract class RoomBase : IRoom
         Description = description;
     }
 
-    public void OnRoomEnter(UnitBase unit)
+    public void OnRoomEnter(Unit unit)
     {
         Console.WriteLine($"{unit.Name} entered {Description}");
         unit.CurrentRoom.Units.Remove(unit);
@@ -29,8 +29,8 @@ public abstract class RoomBase : IRoom
 
     public void AddAdjacentRoom(Room room, Direction direction)
     {
-        AdjacentRooms.Add(new(room, direction));
-        room.AdjacentRooms.Add(new(this as Room, GetOppositeDirection(direction)));
+        //    AdjacentRooms.Add(new(this as Room, direction, room));
+        //    room.AdjacentRooms.Add(new(room, GetOppositeDirection(direction), this as Room));
     }
 
     private Direction GetOppositeDirection(Direction direction)

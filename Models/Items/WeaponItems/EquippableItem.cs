@@ -2,6 +2,7 @@
 using w9_assignment_ksteph.DataTypes;
 using w9_assignment_ksteph.Models.Interfaces.ItemBehaviors;
 using w9_assignment_ksteph.Models.Items;
+using w9_assignment_ksteph.Services.DataHelpers;
 
 namespace w9_assignment_ksteph.Models.Items.WeaponItems;
 
@@ -28,12 +29,12 @@ public class EquippableItem : Item, IEquippableItem
         MaxDurability = maxDurability; WeaponType = weaponType; Name = name;
         RequiredRank = requiredRank; Weight = weight; Crit = crit;
         Durability = maxDurability; Range = range; Hit = hit;
-        ExpModifier = expModifier; Might = might; ID = id;
+        ExpModifier = expModifier; Might = might;
     }
 
     public override string ToString()
     {
-        return ID;
+        return StringHelper.ToItemIdFormat(Name);
     }
 
     public void Equip()

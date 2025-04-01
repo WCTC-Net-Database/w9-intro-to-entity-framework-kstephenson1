@@ -9,8 +9,8 @@ public class ItemPotion : Item, IConsumableItem
     public int UsesLeft { get; set; }
     public ItemPotion()
     {
-        ID = "potion";
-        Name = StringHelper.ToItemNameFormat(ID);
+        string oldId = "potion";
+        Name = StringHelper.ToItemNameFormat(oldId);
         Description = "Use to restore 10 hp.";
         UsesLeft = MaxUses;
     }

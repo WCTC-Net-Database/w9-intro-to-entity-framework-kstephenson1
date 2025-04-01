@@ -18,7 +18,7 @@ public class FileManager<T>
     private Type _type = typeof(T);
     private Dictionary<Type, int> _typeDict = new()
     {
-            {typeof(UnitBase),0},
+            {typeof(Unit),0},
             {typeof(CharacterBase),1},
             {typeof(MonsterBase),2},
             {typeof(WeaponItem),3},

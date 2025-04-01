@@ -21,7 +21,7 @@ public static class Config
     public const string SQL_DATABASE_USERNAME = "kstephenson1";
 
     // SQL Database password with really poor "encryption" if you even want to call it that.
-    public const int SQL_DATABASE_PASSWORD_ENCRYPTED = 588402049;
+    public const int SQL_DATABASE_PASSWORD_ENCRYPTED = 1802596849;
 
     /* * * * * * * * * * * * * * * * *
      *       CHARACTER SETTINGS      *

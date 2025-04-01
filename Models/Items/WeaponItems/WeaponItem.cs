@@ -1,4 +1,5 @@
 ﻿using w9_assignment_ksteph.DataTypes;
+using w9_assignment_ksteph.Services.DataHelpers;
 
 namespace w9_assignment_ksteph.Models.Items.WeaponItems;
 
@@ -13,7 +14,7 @@ public class WeaponItem : EquippableItem
 
     public override string ToString()
     {
-        return ID;
+        return StringHelper.ToItemIdFormat(Name);
     }
 
 }

@@ -15,7 +15,7 @@ using w9_assignment_ksteph.Models.Rooms;
 
 namespace w9_assignment_ksteph.Models.Units.Abstracts;
 
-public abstract class UnitBase : IUnit, ITargetable, IAttack, IHaveInventory
+public class Unit : IUnit, ITargetable, IAttack, IHaveInventory
 {
     // Unit is an abstract class that holds basic unit properties and functions.
     public int UnitId { get; set; }
@@ -75,12 +75,12 @@ public abstract class UnitBase : IUnit, ITargetable, IAttack, IHaveInventory
 
     public Stats Stats { get; set; } = null!;
 
-    public UnitBase()
+    public Unit()
     {
         Inventory.Unit = this;
     }
 
-    public UnitBase(string name, string characterClass, int level, Inventory inventory)
+    public Unit(string name, string characterClass, int level, Inventory inventory)
     {
         Name = name;
         Class = characterClass;
@@ -89,7 +89,7 @@ public abstract class UnitBase : IUnit, ITargetable, IAttack, IHaveInventory
         Inventory.Unit = this;
     }
 
-    public UnitBase(string name, string characterClass, int level, Inventory inventory, Stats stats)
+    public Unit(string name, string characterClass, int level, Inventory inventory, Stats stats)
     {
         Name = name;
         Class = characterClass;
