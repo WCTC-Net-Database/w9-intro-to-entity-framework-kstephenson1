@@ -8,7 +8,7 @@ using w9_assignment_ksteph.Models.Units.Abstracts;
 
 namespace w9_assignment_ksteph.Models.Units.Monsters;
 
-public class EnemyMage : MonsterBase, IMage
+public class EnemyMage : Monster, IMage
 {
     // A Mage unit that is able to cast spells.
     public EnemyMage()
@@ -16,7 +16,7 @@ public class EnemyMage : MonsterBase, IMage
 
     }
 
-    public EnemyMage(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stats stats)
+    public EnemyMage(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stat stats)
     {
 
     }

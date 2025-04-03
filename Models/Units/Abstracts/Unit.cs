@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using CsvHelper.Configuration.Attributes;
 using w9_assignment_ksteph.FileIO.Csv.Converters;
@@ -18,6 +19,7 @@ namespace w9_assignment_ksteph.Models.Units.Abstracts;
 public class Unit : IUnit, ITargetable, IAttack, IHaveInventory
 {
     // Unit is an abstract class that holds basic unit properties and functions.
+    [Key]
     public int UnitId { get; set; }
 
     [Name("Name")]                                          // CsvHelper Attribute
@@ -73,7 +75,7 @@ public class Unit : IUnit, ITargetable, IAttack, IHaveInventory
     [NotMapped]
     public virtual MoveCommand MoveCommand { get; set; } = null!;
 
-    public Stats Stats { get; set; } = null!;
+    public Stat Stat { get; set; }
 
     public Unit()
     {
@@ -89,13 +91,13 @@ public class Unit : IUnit, ITargetable, IAttack, IHaveInventory
         Inventory.Unit = this;
     }
 
-    public Unit(string name, string characterClass, int level, Inventory inventory, Stats stats)
+    public Unit(string name, string characterClass, int level, Inventory inventory, Stat stats)
     {
         Name = name;
         Class = characterClass;
         Level = level;
         Inventory = inventory;
-        Stats = stats;
+        Stat = stats;
         Inventory.Unit = this;
     }
 
@@ -116,7 +118,7 @@ public class Unit : IUnit, ITargetable, IAttack, IHaveInventory
     // Has the unit take damage then check if it is dead.
     public virtual void Damage(int damage)
     {
-        Stats.HitPoints -= damage;
+        Stat.HitPoints -= damage;
         OnHealthChanged();
 
         if (IsDead())
@@ -125,17 +127,17 @@ public class Unit : IUnit, ITargetable, IAttack, IHaveInventory
 
     public virtual void Heal(int heal)
     {
-        Stats.HitPoints += heal;
+        Stat.HitPoints += heal;
         OnHealthChanged();
     }
 
     // Triggers every time this unit takes damage.
     public virtual void OnHealthChanged()
     {
-        if (Stats.HitPoints > Stats.MaxHitPoints)
-            Stats.HitPoints = Stats.MaxHitPoints;
-        if (Stats.HitPoints <= 0)
-            Stats.HitPoints = 0;
+        if (Stat.HitPoints > Stat.MaxHitPoints)
+            Stat.HitPoints = Stat.MaxHitPoints;
+        if (Stat.HitPoints <= 0)
+            Stat.HitPoints = 0;
     }
 
     // Triggers when this unit dies.
@@ -147,29 +149,29 @@ public class Unit : IUnit, ITargetable, IAttack, IHaveInventory
     // Function to check to see if unit should be dead.
     public bool IsDead()
     {
-        return Stats.HitPoints <= 0;
+        return Stat.HitPoints <= 0;
     }
 
     public override string ToString()
     {
-        return $"{Name},{Class},{Level},{Stats.HitPoints},{Inventory}";
+        return $"{Name},{Class},{Level},{Stat.HitPoints},{Inventory}";
     }
 
     public string GetHealthBar()
     {
         string bar = "[[";
-        for (int i = 0; i < Stats.MaxHitPoints; i++)
+        for (int i = 0; i < Stat.MaxHitPoints; i++)
         {
             if (i != 0 && i % 30 == 0)
                 bar += "\n  ";
-            if (i < Stats.HitPoints)
+            if (i < Stat.HitPoints)
                 bar += "[green]■[/]";
             else
                 bar += "[red3]■[/]";
         }
         bar += "]]";
 
-        if (Stats.HitPoints <= 0)
+        if (Stat.HitPoints <= 0)
         {
             return $"[dim]{bar}[/]";
         }

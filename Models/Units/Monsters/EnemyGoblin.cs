@@ -4,7 +4,7 @@ using w9_assignment_ksteph.Models.Units.Abstracts;
 
 namespace w9_assignment_ksteph.Models.Units.Monsters;
 
-public class EnemyGoblin : MonsterBase
+public class EnemyGoblin : Monster
 {
     // A Goblin unit that has no special implementation. . . yet?
     public EnemyGoblin()
@@ -12,7 +12,7 @@ public class EnemyGoblin : MonsterBase
 
     }
 
-    public EnemyGoblin(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stats stats)
+    public EnemyGoblin(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stat stats)
     {
 
     }

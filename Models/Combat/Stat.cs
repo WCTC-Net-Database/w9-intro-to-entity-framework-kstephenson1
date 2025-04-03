@@ -1,20 +1,23 @@
-﻿namespace w9_assignment_ksteph.Models.Combat;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using w9_assignment_ksteph.Models.Units.Abstracts;
 
-public class Stats
+namespace w9_assignment_ksteph.Models.Combat;
+
+public class Stat
 {
-    
-    public int StatsId { get; set; }
+    [Key, ForeignKey("Unit")]
+    public int UnitId { get; set; }
 
-    // // // // // // // // // // // // // // // // //
-    // Health                                       //
-    // // // // // // // // // // // // // // // // //
+    // Navigation
+    public Unit Unit { get; set; }
+
+    // Health Stats
     public int HitPoints  { get; set; }         //  HP
     public int MaxHitPoints { get; set; }       // MHP
     public int Movement { get; set; }           // MOV
 
-    // // // // // // // // // // // // // // // // //
-    // Primary Stats                                //
-    // // // // // // // // // // // // // // // // //
+    // Primary Stats
     public int Constitution { get; set; }       // CON
     public int Strength { get; set; }           // STR
     public int Magic { get; set; }              // MAG
@@ -23,7 +26,8 @@ public class Stats
     public int Luck { get; set; }               // LCK
     public int Defense { get; set; }            // DEF
     public int Resistance { get; set; }         // RES
-    public Stats()
+
+    public Stat()
     {
 
     }

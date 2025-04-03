@@ -8,7 +8,7 @@ using w9_assignment_ksteph.Models.Units.Abstracts;
 
 namespace w9_assignment_ksteph.Models.Units.Monsters;
 
-public class EnemyGhost : MonsterBase, IFlyable
+public class EnemyGhost : Monster, IFlyable
 {
     // A Ghost unit that is able fly.
     public EnemyGhost()
@@ -16,7 +16,7 @@ public class EnemyGhost : MonsterBase, IFlyable
 
     }
 
-    public EnemyGhost(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stats stats)
+    public EnemyGhost(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stat stats)
     {
 
     }

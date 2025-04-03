@@ -1,8 +1,8 @@
 ﻿using w9_assignment_ksteph.DataTypes;
 using w9_assignment_ksteph.Models.Dungeons;
+using w9_assignment_ksteph.Models.Items;
 using w9_assignment_ksteph.Models.Rooms;
 using w9_assignment_ksteph.Models.UI;
-using w9_assignment_ksteph.Models.UI.Menus.InteractiveMenus;
 using w9_assignment_ksteph.Models.Units.Abstracts;
 using w9_assignment_ksteph.Services;
 using W9_assignment_template.Data;
@@ -33,7 +33,7 @@ public class GameEngine
     }
 
     void Test()
-    {                                    //
+    {
         Dungeon dungeon = new Dungeon();
         dungeon.Name = "Intro Dungeon";
         dungeon.Description = "The first dungeon in the game";
@@ -54,9 +54,32 @@ public class GameEngine
 
         dungeon.StartingRoom = entrance;
 
- 
+        if(!_db.Units.Any())
+        {
+            foreach (Character unit in _unitManager.Characters.Units)
+            {
+                _db.Units.Add(unit);
+                _db.Stats.Add(unit.Stat);
+                _db.Inventories.Add(unit.Inventory);
+                foreach (Item item in unit.Inventory.Items)
+                {
+                    _db.Items.Add(item);
+                }
+            }
+            foreach (Monster unit in _unitManager.Monsters.Units)
+            {
+                _db.Units.Add(unit);
+                _db.Stats.Add(unit.Stat);
+                _db.Inventories.Add(unit.Inventory);
+                foreach (Item item in unit.Inventory.Items)
+                {
+                    _db.Items.Add(item);
+                }
+            }
 
-        //_db.SaveChanges();
+            _db.SaveChanges();
+        }
+        
     }
 
     public void Initialization()

@@ -4,14 +4,14 @@ using w9_assignment_ksteph.Models.Units.Abstracts;
 
 namespace w9_assignment_ksteph.Models.Units.Characters;
 
-public class Rogue : CharacterBase
+public class Rogue : Character
 {
     // An Fighter unit that is able to fight.
     public Rogue()
     {
 
     }
-    public Rogue(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stats stats)
+    public Rogue(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stat stats)
     {
 
     }

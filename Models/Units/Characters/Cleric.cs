@@ -9,20 +9,20 @@ using w9_assignment_ksteph.Models.Units.Abstracts;
 
 namespace w9_assignment_ksteph.Models.Units.Characters;
 
-public class Cleric : CharacterBase, ICleric
+public class Cleric : Character, ICleric
 {
     // An Cleric unit that is able to heal and cast spells.
     public Cleric()
     {
 
     }
-    public Cleric(string name, string characterClass, int level, Inventory inventory, Stats stats)
+    public Cleric(string name, string characterClass, int level, Inventory inventory, Stat stats)
     {
         Name = name;
         Class = characterClass;
         Level = level;
         Inventory = inventory;
-        Stats = stats;
+        Stat = stats;
         Inventory.Unit = this;
     }
 

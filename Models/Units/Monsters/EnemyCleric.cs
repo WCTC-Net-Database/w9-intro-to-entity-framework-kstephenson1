@@ -9,7 +9,7 @@ using w9_assignment_ksteph.Models.Units.Abstracts;
 
 namespace w9_assignment_ksteph.Models.Units.Monsters;
 
-public class EnemyCleric : MonsterBase, ICleric
+public class EnemyCleric : Monster, ICleric
 {
     // An Cleric unit that is able to heal and cast spells.
     public EnemyCleric()
@@ -17,7 +17,7 @@ public class EnemyCleric : MonsterBase, ICleric
 
     }
 
-    public EnemyCleric(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stats stats)
+    public EnemyCleric(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stat stats)
     {
 
     }

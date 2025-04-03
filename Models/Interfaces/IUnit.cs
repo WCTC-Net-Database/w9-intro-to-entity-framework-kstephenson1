@@ -14,7 +14,7 @@ public interface IUnit : ITargetable, IAttack, IHaveInventory, IUseItems
     public string Class { get; set; }
     public int Level { get; set; }
     Room? CurrentRoom { get; set; }
-    public Stats Stats { get; set; }
+    public Stat Stat { get; set; }
 
     void Move();
     string GetHealthBar();

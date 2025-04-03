@@ -127,28 +127,28 @@ public class Encounter
     {
         // Attack damage = Attacking unit's strength + (Equipped item's might + bonus if the weapon type has an advantage against the defender's)
         int weaponEfficiency = 1; // for future implementation?
-        return Unit.Stats.Strength + weaponEfficiency * (UnitWeapon.Might + GetTriangleDamageModifier());
+        return Unit.Stat.Strength + weaponEfficiency * (UnitWeapon.Might + GetTriangleDamageModifier());
     }
 
     public int GetMagicAttack()
     {
         // Attack damage = Attacking unit's magic + (Equipped item's might + bonus if the weapon type has an advantage against the defender's)
         int weaponEfficiency = 1; // for future implementation?
-        return Unit.Stats.Magic + weaponEfficiency * (UnitWeapon.Might + GetTriangleDamageModifier());
+        return Unit.Stat.Magic + weaponEfficiency * (UnitWeapon.Might + GetTriangleDamageModifier());
     }
 
     public int GetPhysicalResiliance(IUnit unit)
     {
         // Physical Resiliance = unit's Defense stat
         int terrainBonus = 1; // for future implementation?
-        return unit.Stats.Defense * terrainBonus;
+        return unit.Stat.Defense * terrainBonus;
     }
 
     public int GetMagicResiliance(IUnit unit)
     {
         // Magic Resiliance = Resistance stat
         int terrainBonus = 1; // for future implementation?
-        return unit.Stats.Resistance * terrainBonus;
+        return unit.Stat.Resistance * terrainBonus;
     }
 
     public int GetDamage()
@@ -166,20 +166,20 @@ public class Encounter
     public int GetAttackSpeed()
     {
         // Attack speed = speed - (weapon's weight - unit's constitution [min 0])
-        return Unit.Stats.Speed - (int)MathF.Max(UnitWeapon.Weight - Unit.Stats.Constitution, 0);
+        return Unit.Stat.Speed - (int)MathF.Max(UnitWeapon.Weight - Unit.Stat.Constitution, 0);
     }
 
     public int GetHit()
     {
         // Hit chance = weapon's hit + 2 x attacking unit's DEX + attacking unit's LCK / 2 + weapon advantage modifier of 15%
-        return UnitWeapon.Hit + 2 * Unit.Stats.Dexterity + Unit.Stats.Luck / 2 + GetTriangleHitModifier();
+        return UnitWeapon.Hit + 2 * Unit.Stat.Dexterity + Unit.Stat.Luck / 2 + GetTriangleHitModifier();
     }
 
     public int GetAvoid()
     {
         // Avoid = 2 * Atk Speed + Luck + Terrain Modifier
         int terrainAvoidModifier = 0;// for future implementation?
-        return 2 * GetAttackSpeed() + Unit.Stats.Luck + terrainAvoidModifier;
+        return 2 * GetAttackSpeed() + Unit.Stat.Luck + terrainAvoidModifier;
     }
 
     public int GetDisplayedHit()
@@ -189,12 +189,12 @@ public class Encounter
 
     public int GetCrit()
     {
-        return UnitWeapon.Crit + Unit.Stats.Dexterity * 2;
+        return UnitWeapon.Crit + Unit.Stat.Dexterity * 2;
     }
 
     public int GetCritAvoid()
     {
-        return Unit.Stats.Luck;
+        return Unit.Stat.Luck;
     }
 
     public int GetDisplayedCrit()

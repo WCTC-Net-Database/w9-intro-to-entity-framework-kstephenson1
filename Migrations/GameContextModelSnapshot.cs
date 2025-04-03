@@ -21,13 +21,10 @@ namespace w9_assignment_ksteph.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("w9_assignment_ksteph.Models.Combat.Stats", b =>
+            modelBuilder.Entity("w9_assignment_ksteph.Models.Combat.Stat", b =>
                 {
-                    b.Property<int>("StatsId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("UnitId")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StatsId"));
 
                     b.Property<int>("Constitution")
                         .HasColumnType("int");
@@ -62,7 +59,7 @@ namespace w9_assignment_ksteph.Migrations
                     b.Property<int>("Strength")
                         .HasColumnType("int");
 
-                    b.HasKey("StatsId");
+                    b.HasKey("UnitId");
 
                     b.ToTable("Stats");
                 });
@@ -101,9 +98,15 @@ namespace w9_assignment_ksteph.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InventoryId"));
 
+                    b.Property<int>("UnitId")
+                        .HasColumnType("int");
+
                     b.HasKey("InventoryId");
 
-                    b.ToTable("Inventory");
+                    b.HasIndex("UnitId")
+                        .IsUnique();
+
+                    b.ToTable("Inventories");
 
                     b.HasAnnotation("Relational:JsonPropertyName", "Inventory");
                 });
@@ -131,7 +134,7 @@ namespace w9_assignment_ksteph.Migrations
 
                     b.HasIndex("InventoryId");
 
-                    b.ToTable("Item");
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("w9_assignment_ksteph.Models.Rooms.Room", b =>
@@ -170,9 +173,6 @@ namespace w9_assignment_ksteph.Migrations
                     b.Property<int?>("CurrentRoomRoomId")
                         .HasColumnType("int");
 
-                    b.Property<int>("InventoryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
@@ -180,18 +180,22 @@ namespace w9_assignment_ksteph.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StatsId")
-                        .HasColumnType("int");
-
                     b.HasKey("UnitId");
 
                     b.HasIndex("CurrentRoomRoomId");
 
-                    b.HasIndex("InventoryId");
-
-                    b.HasIndex("StatsId");
-
                     b.ToTable("Units");
+                });
+
+            modelBuilder.Entity("w9_assignment_ksteph.Models.Combat.Stat", b =>
+                {
+                    b.HasOne("w9_assignment_ksteph.Models.Units.Abstracts.Unit", "Unit")
+                        .WithOne("Stat")
+                        .HasForeignKey("w9_assignment_ksteph.Models.Combat.Stat", "UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Unit");
                 });
 
             modelBuilder.Entity("w9_assignment_ksteph.Models.Dungeons.Dungeon", b =>
@@ -203,6 +207,15 @@ namespace w9_assignment_ksteph.Migrations
                         .IsRequired();
 
                     b.Navigation("StartingRoom");
+                });
+
+            modelBuilder.Entity("w9_assignment_ksteph.Models.Inventories.Inventory", b =>
+                {
+                    b.HasOne("w9_assignment_ksteph.Models.Units.Abstracts.Unit", null)
+                        .WithOne("Inventory")
+                        .HasForeignKey("w9_assignment_ksteph.Models.Inventories.Inventory", "UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("w9_assignment_ksteph.Models.Items.Item", b =>
@@ -222,23 +235,7 @@ namespace w9_assignment_ksteph.Migrations
                         .WithMany("Units")
                         .HasForeignKey("CurrentRoomRoomId");
 
-                    b.HasOne("w9_assignment_ksteph.Models.Inventories.Inventory", "Inventory")
-                        .WithMany()
-                        .HasForeignKey("InventoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("w9_assignment_ksteph.Models.Combat.Stats", "Stats")
-                        .WithMany()
-                        .HasForeignKey("StatsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("CurrentRoom");
-
-                    b.Navigation("Inventory");
-
-                    b.Navigation("Stats");
                 });
 
             modelBuilder.Entity("w9_assignment_ksteph.Models.Inventories.Inventory", b =>
@@ -249,6 +246,15 @@ namespace w9_assignment_ksteph.Migrations
             modelBuilder.Entity("w9_assignment_ksteph.Models.Rooms.Room", b =>
                 {
                     b.Navigation("Units");
+                });
+
+            modelBuilder.Entity("w9_assignment_ksteph.Models.Units.Abstracts.Unit", b =>
+                {
+                    b.Navigation("Inventory")
+                        .IsRequired();
+
+                    b.Navigation("Stat")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

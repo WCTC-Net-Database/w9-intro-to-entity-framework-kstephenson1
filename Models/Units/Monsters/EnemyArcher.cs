@@ -9,7 +9,7 @@ using w9_assignment_ksteph.Models.Units.Abstracts;
 
 namespace w9_assignment_ksteph.Models.Units.Monsters;
 
-public class EnemyArcher : MonsterBase, IArcher
+public class EnemyArcher : Monster, IArcher
 {
     // An Archer unit that is able to shoot.
 
@@ -18,7 +18,7 @@ public class EnemyArcher : MonsterBase, IArcher
 
     }
 
-    public EnemyArcher(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stats stats)
+    public EnemyArcher(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stat stats)
     {
 
     }

@@ -8,14 +8,14 @@ using w9_assignment_ksteph.Models.Units.Abstracts;
 
 namespace w9_assignment_ksteph.Models.Units.Characters;
 
-public class Wizard : CharacterBase, IMage
+public class Wizard : Character, IMage
 {
     // A Mage unit that is able to cast spells.
     public Wizard()
     {
 
     }
-    public Wizard(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stats stats)
+    public Wizard(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stat stats)
     {
 
     }

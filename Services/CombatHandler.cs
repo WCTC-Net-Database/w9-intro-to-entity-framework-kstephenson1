@@ -23,7 +23,7 @@ public class CombatHandler
             if (unit == null) break;
 
             // If the selected unit is down, restarts
-            if (unit.Stats.HitPoints <= 0) continue;
+            if (unit.Stat.HitPoints <= 0) continue;
 
             // Asks the user to choose an action for unit.
             ICommand command = _userInterface.CommandMenu.Display(unit, $"Select action for {unit.Name}", "[[Go Back]]");

@@ -6,7 +6,7 @@ namespace w9_assignment_ksteph.Models.Interfaces.UnitBehaviors;
 
 public interface ICastable
 {
-    public Stats Stats { get; set; }
+    public Stat Stat { get; set; }
     // Interface tha allows units to cast spells.
     CommandInvoker Invoker { set; get; }
     CastCommand CastCommand { set; get; }

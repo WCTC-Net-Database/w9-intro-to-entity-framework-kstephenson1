@@ -9,8 +9,8 @@ public class UnitManager
 {
     // The UnitManager class is a static class that holds lists of units for reference.
     private FileManager<Unit> _unitFileManager;
-    public UnitSet<CharacterBase> Characters { get; private set; } = new();
-    public UnitSet<MonsterBase> Monsters { get; private set; } = new();
+    public UnitSet<Character> Characters { get; private set; } = new();
+    public UnitSet<Monster> Monsters { get; private set; } = new();
 
     public UnitManager(FileManager<Unit> unitFileManager)
     {
@@ -24,20 +24,20 @@ public class UnitManager
 
         foreach (Unit unit in importedUnits)
         {
-            if (unit is CharacterBase character)
+            if (unit is Character character)
             {
                 Characters.AddUnit(character);
             }
 
-            if (unit is MonsterBase monster)
+            if (unit is Monster monster)
             {
                 Monsters.AddUnit(monster);
             }
         }
 
-        foreach (IUnit unit in Characters.Units)
+        foreach (Unit unit in Characters.Units)
         {
-            unit.Stats.MaxHitPoints = unit.Stats.HitPoints;
+            unit.Stat.MaxHitPoints = unit.Stat.HitPoints;
             unit.Inventory.Unit = unit;
             foreach (IItem item in unit.Inventory.Items!)
             {
@@ -45,9 +45,9 @@ public class UnitManager
             }
         }
 
-        foreach (IUnit unit in Monsters.Units)
+        foreach (Unit unit in Monsters.Units)
         {
-            unit.Stats.MaxHitPoints = unit.Stats.HitPoints;
+            unit.Stat.MaxHitPoints = unit.Stat.HitPoints;
         }
     }
 
@@ -59,7 +59,7 @@ public class UnitManager
             unitList.Add(character);
         }
 
-        foreach (MonsterBase monster in Monsters.Units)
+        foreach (Monster monster in Monsters.Units)
         {
             unitList.Add(monster);
         }

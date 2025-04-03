@@ -2,6 +2,7 @@
 using w9_assignment_ksteph.Models.Interfaces;
 using w9_assignment_ksteph.Models.Interfaces.ItemBehaviors;
 using w9_assignment_ksteph.Models.Items;
+using w9_assignment_ksteph.Models.Units.Abstracts;
 using w9_assignment_ksteph.Services.DataHelpers;
 
 namespace w9_assignment_ksteph.Models.Inventories;
@@ -10,7 +11,8 @@ public class Inventory
     public int InventoryId { get; set; }
     // The Inventory class holds a list of items.
     [JsonIgnore]
-    public IUnit? Unit;
+    public Unit? Unit;
+    public int UnitId { get; set; }
     public List<Item>? Items { get; set; } = new();
 
     public Inventory()
