@@ -35,6 +35,7 @@ public class Unit : IUnit, ITargetable, IAttack, IHaveInventory
     [JsonPropertyName("Inventory")]                         // Json Atribute
     [TypeConverter(typeof(CsvInventoryConverter))]          // CsvHelper Attribute that helps CsvHelper import a new inventory object instead of a string.
     public virtual Inventory Inventory { get; set; } = new();
+    public int InventoryId { get; set; }
 
     [Ignore]
     [JsonIgnore]

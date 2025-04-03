@@ -7,14 +7,18 @@ using w9_assignment_ksteph.DataTypes;
 using w9_assignment_ksteph.FileIO.Json.Converters;
 using w9_assignment_ksteph.Models.Interfaces.FileIO;
 
+[Obsolete]
 public class JsonFileHandler<T> : ICharacterIO, IItemIO
 {
     // JsonFileHandler is used to convert bewtween units and json format.  Just like the CsvFileHandler, this class was refactored
     // to implement generic types.
 
+    [Obsolete]
     private const string JSON_EXT = ".json";
+    [Obsolete]
     private readonly JsonSerializerOptions _options = new();
 
+    [Obsolete]
     public JsonFileHandler()
     {
         _options.Converters.Add(new JsonInventoryConverter());      // Using a custom converter to convert json string -> Inventory
@@ -26,6 +30,7 @@ public class JsonFileHandler<T> : ICharacterIO, IItemIO
         //_options.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     }
 
+    [Obsolete]
     public List<T> Read<T>(string dir)
     {
 
@@ -35,6 +40,7 @@ public class JsonFileHandler<T> : ICharacterIO, IItemIO
         return JsonSerializer.Deserialize<List<T>>(json, _options)!;
     }
 
+    [Obsolete]
     public void Write<T>(List<T> units, string dir)
     {
         using StreamWriter writer = new(dir + JSON_EXT);            // Takes a list of characters and writes to the json file

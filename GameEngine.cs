@@ -13,13 +13,15 @@ public class GameEngine
 {
     private GameContext _db;
     private DungeonFactory _dungeonFactory;
+    private RoomFactory _roomFactory;
     private UnitManager _unitManager;
     private UserInterface _userInterface;
 
-    public GameEngine(GameContext db, UnitManager unitManager, UserInterface userInterface, DungeonFactory dungeonFactory)
+    public GameEngine(GameContext db, UnitManager unitManager, UserInterface userInterface, DungeonFactory dungeonFactory, RoomFactory roomFactory)
     {
         _db = db;
         _dungeonFactory = dungeonFactory;
+        _roomFactory = roomFactory;
         _unitManager = unitManager;
         _userInterface = userInterface;
     }
@@ -27,34 +29,46 @@ public class GameEngine
     public void StartGameEngine()
     {
         Initialization();
-        Test();
+        SeedDb();
         Run();
         End();
     }
 
-    void Test()
+    void SeedDb()
     {
-        Dungeon dungeon = new Dungeon();
-        dungeon.Name = "Intro Dungeon";
-        dungeon.Description = "The first dungeon in the game";
-        RoomFactory factory = new();
-        Room entrance = factory.CreateRoom("intro.entrance");
-        Room jail = factory.CreateRoom("intro.jail");
-        Room kitchen = factory.CreateRoom("intro.kitchen");
-        Room hallway = factory.CreateRoom("intro.hallway");
-        Room library = factory.CreateRoom("intro.entrance");
-        Room dwelling = factory.CreateRoom("intro.dwelling");
-        Room dwelling2 = factory.CreateRoom("intro.dwelling2");
-        entrance.AddAdjacentRoom(jail, Direction.West);
-        entrance.AddAdjacentRoom(kitchen, Direction.East);
-        entrance.AddAdjacentRoom(hallway, Direction.North);
-        hallway.AddAdjacentRoom(dwelling2, Direction.West);
-        hallway.AddAdjacentRoom(library, Direction.East);
-        hallway.AddAdjacentRoom(dwelling, Direction.North);
+        if(!_db.Dungeons.Any())
+        {
+            Dungeon dungeon = new Dungeon();
+            dungeon.Name = "Intro Dungeon";
+            dungeon.Description = "The first dungeon in the game";
+            Room entrance = _roomFactory.CreateRoom("intro.entrance");
+            Room jail = _roomFactory.CreateRoom("intro.jail");
+            Room kitchen = _roomFactory.CreateRoom("intro.kitchen");
+            Room hallway = _roomFactory.CreateRoom("intro.hallway");
+            Room library = _roomFactory.CreateRoom("intro.entrance");
+            Room dwelling = _roomFactory.CreateRoom("intro.dwelling");
+            Room dwelling2 = _roomFactory.CreateRoom("intro.dwelling2");
+            entrance.AddAdjacentRoom(jail, Direction.West);
+            entrance.AddAdjacentRoom(kitchen, Direction.East);
+            entrance.AddAdjacentRoom(hallway, Direction.North);
+            hallway.AddAdjacentRoom(dwelling2, Direction.West);
+            hallway.AddAdjacentRoom(library, Direction.East);
+            hallway.AddAdjacentRoom(dwelling, Direction.North);
+            List<Room> rooms = new();
+            rooms.AddRange<Room>(entrance, jail, kitchen, hallway, library, dwelling, dwelling2);
 
-        dungeon.StartingRoom = entrance;
+            dungeon.StartingRoom = entrance;
 
-        if(!_db.Units.Any())
+            _db.Dungeons.Add(dungeon);
+
+            foreach (Room room in rooms)
+            {
+                _db.Rooms.Add(room);
+            }
+            _db.SaveChanges();
+        }
+
+        if (!_db.Units.Any())
         {
             foreach (Character unit in _unitManager.Characters.Units)
             {

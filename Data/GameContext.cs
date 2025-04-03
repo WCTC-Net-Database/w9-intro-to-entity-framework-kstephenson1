@@ -26,7 +26,6 @@ public class GameContext : DbContext
         //    .WithOne(s => s.Unit) // Navigation property
         //    .HasForeignKey<Stat>(s => s.StatId); // Foreign key property
             //.HasForeignKey<Unit>(u => u.StatId);
-        // Google AI assisted me with setting up the one-to-one relationship between Unit and Stats
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

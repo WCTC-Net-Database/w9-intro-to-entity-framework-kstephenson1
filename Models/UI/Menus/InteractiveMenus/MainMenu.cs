@@ -11,10 +11,12 @@ public class MainMenu : InteractiveMenu
     // is completed when that menu item is chosen.  It loops until the menu is exited.
     private CharacterUtilities _characterUtilities;
     private FileManager<Unit> _unitFileManager;
-    public MainMenu(CharacterUtilities characterUtilities, FileManager<Unit> unitFileManager)
+    private RoomFactory _roomFactory;
+    public MainMenu(CharacterUtilities characterUtilities, FileManager<Unit> unitFileManager, RoomFactory roomFactory)
     {
         _characterUtilities = characterUtilities;
         _unitFileManager = unitFileManager;
+        _roomFactory = roomFactory;
     }
     public void AddMenuItem(string name, string desc, Action action)
     {
@@ -40,6 +42,7 @@ public class MainMenu : InteractiveMenu
         AddMenuItem("Display All Characters", "Displays all characters and items in their inventory.", _characterUtilities.DisplayCharacters);
         AddMenuItem("Find Character", "Finds an existing character by name.", _characterUtilities.FindCharacter);
         AddMenuItem("New Character", "Creates a new character.", _characterUtilities.NewCharacter);
+        AddMenuItem("New Room", "Creates a new room.", _roomFactory.CreateRoomAndAddToContext);
         AddMenuItem("Level Up Chracter", "Levels an existing character.", _characterUtilities.LevelUp);
         AddMenuItem("Change File Format", "Changes the file format between Csv and Json", _unitFileManager.SwitchFileType);
         AddMenuItem(exitMessage, "", DoNothing);

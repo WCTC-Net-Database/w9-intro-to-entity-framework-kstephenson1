@@ -7,14 +7,17 @@ using CsvHelper.Configuration;
 using w9_assignment_ksteph.Configuration;
 using w9_assignment_ksteph.Models.Interfaces.FileIO;
 
+[Obsolete]
 public class CsvFileHandler<T> : ICharacterIO, IItemIO
 {
     // CsvFileHandler<Ttype> is a class that handles the read and write functions for a Ttype type.  This class was turned generic to allow
     // the import and export of Characters, Monsters, and whatever other units we want.
 
-    private const string CSV_EXT = ".csv";    
+    [Obsolete]
+    private const string CSV_EXT = ".csv";
 
     // Is used to deserialize generic unit types from csv
+    [Obsolete]
     public List<T> Read<T>(string dir)
     {
         using StreamReader reader = new(dir + CSV_EXT);
@@ -27,6 +30,7 @@ public class CsvFileHandler<T> : ICharacterIO, IItemIO
     }
 
     // Is used to serialize generic unit types to csv
+    [Obsolete]
     public void Write<T>(List<T> tList, string dir)
     {
         // Checks the Config to determine whether or not to add double quotes to the csv writer output.

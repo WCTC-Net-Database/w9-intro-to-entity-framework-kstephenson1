@@ -4,8 +4,10 @@ using w9_assignment_ksteph.Models.Inventories;
 
 namespace w9_assignment_ksteph.FileIO.Json.Converters;
 
+[Obsolete]
 public class JsonInventoryValueConverter : JsonConverterFactory
 {
+    [Obsolete]
     public override bool CanConvert(Type type)
     {
         // Determines whether or not this converter can interact with the type.
@@ -15,6 +17,7 @@ public class JsonInventoryValueConverter : JsonConverterFactory
             return false;
     }
 
+    [Obsolete]
     public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options)
     {
         // Seems to pull a new default Inventory object from thin air cast as a JsonConverter.

@@ -6,8 +6,10 @@ using w9_assignment_ksteph.Services.DataHelpers;
 namespace w9_assignment_ksteph.FileIO.Json.Converters;
 
 // The JsonInventoryConverter is used to turn json format into an Inventories Object automatically.
+[Obsolete]
 public class JsonInventoryConverter : JsonConverter<Inventory>
 {
+    [Obsolete]
     public override Inventory? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType == JsonTokenType.Null)
@@ -37,6 +39,7 @@ public class JsonInventoryConverter : JsonConverter<Inventory>
         throw new JsonException($"ARRAYREADER: Unexpected token type {reader.TokenType}");
     }
 
+    [Obsolete]
     public override void Write(Utf8JsonWriter writer, Inventory inventory, JsonSerializerOptions options)
     {
         writer.WriteStartArray();

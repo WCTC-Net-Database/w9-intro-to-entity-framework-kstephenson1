@@ -16,13 +16,15 @@ public class CharacterUtilities
 {
     private CharacterUI _characterUI;
     private GameContext _db;
+    private LevelUpMenu _levelUpMenu;
     private UnitClassMenu _unitClassMenu;
     // CharacterFunctions class contains fuctions that manipulate characters based on user input.
 
-    public CharacterUtilities(CharacterUI characterUI, GameContext db, UnitClassMenu unitClassMenu)
+    public CharacterUtilities(CharacterUI characterUI, GameContext db, UnitClassMenu unitClassMenu, LevelUpMenu levelUpMenu)
     {
         _characterUI = characterUI;
         _db = db;
+        _levelUpMenu = levelUpMenu;
         _unitClassMenu = unitClassMenu;
     }
     public void NewCharacter() // Creates a new character.  Asks for name, class, level, hitpoints, and items.
@@ -69,7 +71,7 @@ public class CharacterUtilities
     public void FindCharacter() // Asks the user for a name and displays a character based on input.
     {
         string characterName = Input.GetString("What is the name of the character you would like to search for? ");
-        Character character = FindCharacterByName(characterName)!;
+        Unit character = FindCharacterByName(characterName)!;
         Console.Clear();
 
         if (character != null)
@@ -82,29 +84,43 @@ public class CharacterUtilities
         }
     }
 
-    private Character? FindCharacterByName(string name) // Finds and returns a character based on input.
+    private Unit? FindCharacterByName(string name) // Finds and returns a character based on input.
     {
-        var unit = _db.Units.Where(character => string.Equals(character.Name, name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-        return (Character)unit;
+        var unit = _db.Units.Where(c => c.Name.ToUpper() == name.ToUpper()).FirstOrDefault();
+        return unit;
     }
 
     public void LevelUp() //Asks the user for a character to level up, then displays that character.
     {
         string characterName = Input.GetString("What is the name of the character that you would like to level up? ");
-        Character character = FindCharacterByName(characterName)!;
+        Unit unit = FindCharacterByName(characterName)!;
         Console.Clear();
 
-        if (character != null)
+        if (unit != null)
         {
-            if (character.Level < Config.CHARACTER_LEVEL_MAX)
+            if (unit.Level < Config.CHARACTER_LEVEL_MAX)
             {
-                character.Level++;
-                AnsiConsole.MarkupLine($"[Green]Congratulations! {character.Name} has reached level {character.Level}[/]\n");
-                _characterUI.DisplayCharacterInfo(character);
+                int levelModifier = _levelUpMenu.Display($"Choose how to change the level for {unit.Name}", "Go Back");
+                _db.Units.Update(unit);
+                unit.Level += levelModifier;
+                switch (levelModifier)
+                {
+                    case -1:
+                        AnsiConsole.MarkupLine($"[Red]Yikes! {unit.Name} has been demoted to level {unit.Level}[/]\n");
+                        break;
+                    case 1:
+                        AnsiConsole.MarkupLine($"[Green]Congratulations! {unit.Name} has reached level {unit.Level}[/]\n");
+                        break;
+                    default:
+                        AnsiConsole.MarkupLine($"[White]{unit.Name} remains the same level[/]\n");
+                        break;
+                }
+                _characterUI.DisplayCharacterInfo(unit);
+                _db.SaveChanges();
             }
             else
             {
-                AnsiConsole.MarkupLine($"[Red]{character.Name} is already max level! ({Config.CHARACTER_LEVEL_MAX})[/]\n");
+                AnsiConsole.MarkupLine($"[Red]{unit.Name} is already max level! ({Config.CHARACTER_LEVEL_MAX})[/]\n");
             }
         }
         else

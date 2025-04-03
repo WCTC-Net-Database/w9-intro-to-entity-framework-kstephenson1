@@ -1,10 +1,32 @@
 ﻿using w9_assignment_ksteph.Models.Interfaces.Rooms;
 using w9_assignment_ksteph.Models.Rooms;
+using w9_assignment_ksteph.Services.DataHelpers;
+using W9_assignment_template.Data;
 
 namespace w9_assignment_ksteph.Services;
 
 public class RoomFactory
 {
+    private GameContext _db;
+    public RoomFactory(GameContext context)
+    {
+        _db = context;
+    }
+
+    public void CreateRoomAndAddToContext()
+    {
+        Console.Clear();
+        Console.WriteLine(
+            "-------------------" +
+            "    CREATE ROOM    " +
+            "-------------------\n");
+        string name = Input.GetString("Enter Name for new room:");
+        string desc = Input.GetString($"Enter Description for room \"{name}\": ");
+        Room room = new(name, desc);
+        _db.Rooms.Add(room);
+        _db.SaveChanges();
+        Console.WriteLine($"Room \"{name}\" with description \"{desc}\" has been added to the game.");
+    }
     public Room CreateRoom(string roomType)
     {
         return roomType switch

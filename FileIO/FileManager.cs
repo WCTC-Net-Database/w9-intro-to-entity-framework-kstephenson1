@@ -8,14 +8,18 @@ using w9_assignment_ksteph.Models.Interfaces.FileIO;
 using w9_assignment_ksteph.Models.Items.WeaponItems;
 using w9_assignment_ksteph.Models.Units.Abstracts;
 
+[Obsolete]
 public class FileManager<T>
 {
     // FileManager contains redirects to functions that assist with file IO functions.  This class allows the import and export of a generic
     // unit type.
 
+    [Obsolete]
     private FileType _fileType = Config.DEFAULT_FILE_TYPE;
 
+    [Obsolete]
     private Type _type = typeof(T);
+    [Obsolete]
     private Dictionary<Type, int> _typeDict = new()
     {
             {typeof(Unit),0},
@@ -24,6 +28,7 @@ public class FileManager<T>
             {typeof(WeaponItem),3},
         };
 
+    [Obsolete]
     private string GetFilePath()
     {
         return _typeDict[_type] switch
@@ -37,6 +42,7 @@ public class FileManager<T>
 
     }
 
+    [Obsolete]
     private IFileIO GetFileType<T>() // Checks to see what the current file type is set to and execute the proper file system.
     {
         return _fileType switch
@@ -47,6 +53,7 @@ public class FileManager<T>
         };
     }
 
+    [Obsolete]
     public void SwitchFileType()
     {
         Console.Clear();
@@ -61,6 +68,8 @@ public class FileManager<T>
         }
     }
 
+    [Obsolete]
     public List<T> Import<T>() => GetFileType<T>().Read<T>(GetFilePath());
+    [Obsolete]
     public void Export<T>(List<T> tList) => GetFileType<T>().Write<T>(tList, GetFilePath());
 }

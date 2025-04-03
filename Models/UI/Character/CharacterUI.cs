@@ -3,6 +3,7 @@ using Spectre.Console;
 using w9_assignment_ksteph.Models.Combat;
 using w9_assignment_ksteph.Models.Interfaces;
 using w9_assignment_ksteph.Models.Inventories;
+using w9_assignment_ksteph.Models.Items;
 using w9_assignment_ksteph.Models.Units.Abstracts;
 using W9_assignment_template.Data;
 
@@ -46,11 +47,17 @@ public class CharacterUI
         Grid invTable = new Grid();
         invTable.AddColumn();
 
-        Inventory inventory = _db.Inventories.FirstOrDefault(i => i.UnitId == unit.UnitId);
+        Unit dbUnit = _db.Units.FirstOrDefault(u => u.UnitId == unit.UnitId);
 
-        if (unit.Inventory.Items!.Count != 0)
+
+        //Inventory inventory = _db.Inventories.FirstOrDefault(i => i.UnitId == unit.UnitId);
+        var items = from i in _db.Items
+                    where i.InventoryId == unit.InventoryId
+                    select i;
+
+        if (items.Count() != 0)
         {
-            foreach (IItem item in unit.Inventory.Items!)
+            foreach (IItem item in items!)
             {
                 invTable.AddRow(item.Name);
             }

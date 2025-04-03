@@ -28,6 +28,7 @@ class Program
         services.AddDbContext<GameContext>();
         services.AddTransient<InventoryMenu>();
         services.AddTransient<ItemCommandMenu>();
+        services.AddTransient<LevelUpMenu>();
         services.AddTransient<MainMenu>();
         services.AddTransient<RoomFactory>();
         services.AddTransient<RoomNavigationMenu>();
@@ -41,8 +42,9 @@ class Program
         UnitManager unitManager = provider.GetRequiredService<UnitManager>();
         UserInterface userInterface = provider.GetRequiredService<UserInterface>();
         DungeonFactory dungeonFactory = provider.GetRequiredService<DungeonFactory>();
+        RoomFactory roomFactory = provider.GetRequiredService<RoomFactory>();
 
-        GameEngine engine = new GameEngine(db, unitManager, userInterface, dungeonFactory);
+        GameEngine engine = new GameEngine(db, unitManager, userInterface, dungeonFactory, roomFactory);
         engine.StartGameEngine();
     }
 }

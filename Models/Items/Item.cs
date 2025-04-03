@@ -11,6 +11,7 @@ public class Item : IItem
     public int ItemId { get; set; }
     [JsonIgnore]
     public Inventory Inventory { get; set; }
+    public int InventoryId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
 
