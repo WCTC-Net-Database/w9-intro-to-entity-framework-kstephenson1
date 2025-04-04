@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using w9_assignment_ksteph.Configuration;
 using w9_assignment_ksteph.Models.Combat;
 using w9_assignment_ksteph.Models.Dungeons;
 using w9_assignment_ksteph.Models.Inventories;
 using w9_assignment_ksteph.Models.Items;
+using w9_assignment_ksteph.Models.Items.ConsumableItems;
+using w9_assignment_ksteph.Models.Items.WeaponItems;
 using w9_assignment_ksteph.Models.Rooms;
 using w9_assignment_ksteph.Models.Units.Abstracts;
 using w9_assignment_ksteph.Models.Units.Characters;
@@ -25,7 +26,7 @@ public class GameContext : DbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.Entity<Unit>()
-            .HasDiscriminator(d => d.UnitType)
+            .HasDiscriminator(unit => unit.UnitType)
             .HasValue<Cleric>(nameof(Cleric))
             .HasValue<Fighter>(nameof(Fighter))
             .HasValue<Knight>(nameof(Knight))
@@ -37,10 +38,16 @@ public class GameContext : DbContext
             .HasValue<EnemyGhost>(nameof(EnemyGhost))
             .HasValue<EnemyGoblin>(nameof(EnemyGoblin))
             .HasValue<EnemyMage>(nameof(EnemyMage));
-    }
 
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //{
-    //    optionsBuilder.UseSqlServer($"Data Source={Config.SQL_SERVER_ADDRESS};Database={Config.SQL_DATABASE_NAME};User ID={Config.SQL_DATABASE_USERNAME};Password=000{MathF.Sqrt(Config.SQL_DATABASE_PASSWORD_ENCRYPTED)*5*2}");
-    //}
+        builder.Entity<Item>()
+            .HasDiscriminator(item => item.ItemType)
+            .HasValue<GenericItem>(nameof(GenericItem))
+
+            .HasValue<ItemBook>(nameof(ItemBook))
+            .HasValue<ItemLockpick>(nameof(ItemLockpick))
+            .HasValue<ItemPotion>(nameof(ItemPotion))
+
+            .HasValue<MagicWeaponItem>(nameof(MagicWeaponItem))
+            .HasValue<WeaponItem>(nameof(WeaponItem));
+    }
 }

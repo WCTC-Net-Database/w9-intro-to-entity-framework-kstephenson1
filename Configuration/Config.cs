@@ -1,5 +1,4 @@
 ﻿using w9_assignment_ksteph.DataTypes;
-using w9_assignment_ksteph.DataTypes;
 
 namespace w9_assignment_ksteph.Configuration;
 
