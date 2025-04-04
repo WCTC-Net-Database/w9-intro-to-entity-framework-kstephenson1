@@ -3,10 +3,11 @@ using w9_assignment_ksteph.Services.DataHelpers;
 
 namespace w9_assignment_ksteph.Models.Items.ConsumableItems;
 
-public class ItemLockpick : Item, IConsumableItem
+public class ItemLockpick : ConsumableItem, IConsumableItem
 {
-    public int MaxUses { get; set; } = 3;
-    public int UsesLeft { get; set; }
+    public override string ItemType { get; set; } = "ItemLockpick";
+    public override int MaxUses { get; set; } = 5;
+
     public ItemLockpick()
     {
         string oldId = "lockpick";
@@ -30,5 +31,9 @@ public class ItemLockpick : Item, IConsumableItem
             Console.WriteLine($"The lockpick broke!");
             Inventory.RemoveItem(this);
         }
+    }
+    public override string ToString()
+    {
+        return $"{Name} ({UsesLeft}/{MaxUses})";
     }
 }

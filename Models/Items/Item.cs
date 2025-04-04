@@ -5,11 +5,13 @@ using w9_assignment_ksteph.Services.DataHelpers;
 
 namespace w9_assignment_ksteph.Models.Items;
 
-public class Item : IItem
+public abstract class Item : IItem
 {
     // Item is a class that holds item information.
     public int ItemId { get; set; }
     [JsonIgnore]
+
+    public abstract string ItemType { get; set; }
     public virtual Inventory Inventory { get; set; }
     public int InventoryId { get; set; }
     public string Name { get; set; }
@@ -17,16 +19,16 @@ public class Item : IItem
 
     public Item() { }
 
-    public Item(string id)
-    {
-        Name = StringHelper.ToItemNameFormat(id);
-        Description = StringHelper.ToItemNameFormat(Name);
-    }
-
-    public Item(string id, string name)
+    public Item(string name)
     {
         Name = StringHelper.ToItemNameFormat(name);
         Description = StringHelper.ToItemNameFormat(Name);
+    }
+
+    public Item(string name, string desc)
+    {
+        Name = StringHelper.ToItemNameFormat(name);
+        Description = StringHelper.ToItemNameFormat(desc);
     }
 
     public override string ToString()

@@ -3,10 +3,11 @@ using w9_assignment_ksteph.Services.DataHelpers;
 
 namespace w9_assignment_ksteph.Models.Items.ConsumableItems;
 
-public class ItemPotion : Item, IConsumableItem
+public class ItemPotion : ConsumableItem, IConsumableItem
 {
-    public int MaxUses { get; set; } = 3;
-    public int UsesLeft { get; set; }
+    public override string ItemType { get; set; } = "ItemPotion";
+    public override int MaxUses { get; set; } = 3;
+
     public ItemPotion()
     {
         string oldId = "potion";
@@ -40,5 +41,10 @@ public class ItemPotion : Item, IConsumableItem
                 Inventory.RemoveItem(this);
             }
         }
+    }
+
+    public override string ToString()
+    {
+        return $"{Name} ({UsesLeft}/{MaxUses})";
     }
 }

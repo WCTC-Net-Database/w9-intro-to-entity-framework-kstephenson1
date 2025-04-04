@@ -3,10 +3,10 @@ using w9_assignment_ksteph.Services.DataHelpers;
 
 namespace w9_assignment_ksteph.Models.Items.ConsumableItems;
 
-public class ItemBook : Item, IConsumableItem
+public class ItemBook : ConsumableItem, IConsumableItem
 {
-    public int MaxUses { get; set; } = 10;
-    public int UsesLeft { get; set; }
+    public override string ItemType { get; set; } = "ItemBook";
+    public override int MaxUses { get; set ; } = 10;
     public ItemBook()
     {
         string oldId = "book";
@@ -23,5 +23,10 @@ public class ItemBook : Item, IConsumableItem
     public void UseItem()
     {
         Console.WriteLine($"You read the book. Isn't there a battle going on right now!?");
+    }
+
+    public override string ToString()
+    {
+        return $"{Name} ({UsesLeft}/{MaxUses})";
     }
 }

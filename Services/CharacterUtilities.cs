@@ -1,11 +1,12 @@
 ﻿namespace w9_assignment_ksteph.Services;
 
-using Microsoft.EntityFrameworkCore;
 using Spectre.Console;
 using w9_assignment_ksteph.Configuration;
 using w9_assignment_ksteph.Models.Combat;
+using w9_assignment_ksteph.Models.Interfaces.Rooms;
 using w9_assignment_ksteph.Models.Inventories;
 using w9_assignment_ksteph.Models.Items;
+using w9_assignment_ksteph.Models.Rooms;
 using w9_assignment_ksteph.Models.UI.Character;
 using w9_assignment_ksteph.Models.UI.Menus.InteractiveMenus;
 using w9_assignment_ksteph.Models.Units.Abstracts;
@@ -17,14 +18,16 @@ public class CharacterUtilities
     private CharacterUI _characterUI;
     private GameContext _db;
     private LevelUpMenu _levelUpMenu;
+    private RoomMenu _roomMenu;
     private UnitClassMenu _unitClassMenu;
     // CharacterFunctions class contains fuctions that manipulate characters based on user input.
 
-    public CharacterUtilities(CharacterUI characterUI, GameContext db, UnitClassMenu unitClassMenu, LevelUpMenu levelUpMenu)
+    public CharacterUtilities(CharacterUI characterUI, GameContext db, UnitClassMenu unitClassMenu, LevelUpMenu levelUpMenu, RoomMenu roomMenu)
     {
         _characterUI = characterUI;
         _db = db;
         _levelUpMenu = levelUpMenu;
+        _roomMenu = roomMenu;
         _unitClassMenu = unitClassMenu;
     }
     public void NewCharacter() // Creates a new character.  Asks for name, class, level, hitpoints, and items.
@@ -41,7 +44,7 @@ public class CharacterUtilities
             string? newItem = Input.GetString($"Enter the name of an item in {name}'s inventory. (Leave blank to end): ", false);
             if (newItem != "")
             {
-                inventory.AddItem(new Item(newItem));
+                inventory.AddItem(new GenericItem(newItem));
                 continue;
             }
             break;
@@ -55,12 +58,37 @@ public class CharacterUtilities
         character.Name = name;
         character.Class = characterClass.Name;
         character.Level = level;
-        character.Stats = new Stat();
-        character.Stats.HitPoints = hitPoints;
-        character.Stats.MaxHitPoints = hitPoints;
         character.Inventory = inventory;
 
+        Stat stat = new Stat();
+        stat.HitPoints = hitPoints;
+        stat.MaxHitPoints = hitPoints;
+        stat.Movement = 5;
+        stat.Constitution = 5;
+        stat.Strength = 8;
+        stat.Magic = 8;
+        stat.Dexterity = 8;
+        stat.Speed = 8;
+        stat.Luck = 8;
+        stat.Defense = 8;
+        stat.Resistance = 8;
+
+        character.Stat = stat;
+
+        IRoom room = _roomMenu.Display($"Select room for {character.Name}","[[No Room]]");
+        if (room != null)
+        {
+            character.CurrentRoom = (Room)room;
+        }
+
+        _db.Inventories.Add(inventory);
+        foreach (Item item in inventory.Items)
+        {
+            _db.Items.Add(item);
+        }
+        _db.Stats.Add(character.Stat);
         _db.Units.Add(character);
+        _db.SaveChanges();
     }
 
     public T CastObject<T>(object input)
@@ -98,30 +126,38 @@ public class CharacterUtilities
 
         if (unit != null)
         {
-            if (unit.Level < Config.CHARACTER_LEVEL_MAX)
+            int levelModifier = _levelUpMenu.Display($"Choose how to change the level for {unit.Name}", "Go Back");
+            _db.Units.Update(unit);
+            switch (levelModifier)
             {
-                int levelModifier = _levelUpMenu.Display($"Choose how to change the level for {unit.Name}", "Go Back");
-                _db.Units.Update(unit);
-                unit.Level += levelModifier;
-                switch (levelModifier)
-                {
-                    case -1:
-                        AnsiConsole.MarkupLine($"[Red]Yikes! {unit.Name} has been demoted to level {unit.Level}[/]\n");
-                        break;
-                    case 1:
+                case -1:
+                    if (unit.Level > 1)
+                    {
+                        unit.Level += levelModifier;
+                        AnsiConsole.MarkupLine($"[Yellow]Yikes! {unit.Name} has been demoted to level {unit.Level}[/]\n");
+                    }
+                    else
+                    {
+                        AnsiConsole.MarkupLine($"[Red]{unit.Name} is level one and cannot go down another level![/]\n");
+                    }
+                    break;
+                case 1:
+                    if (unit.Level < Config.CHARACTER_LEVEL_MAX)
+                    {
+                        unit.Level += levelModifier;
                         AnsiConsole.MarkupLine($"[Green]Congratulations! {unit.Name} has reached level {unit.Level}[/]\n");
-                        break;
-                    default:
-                        AnsiConsole.MarkupLine($"[White]{unit.Name} remains the same level[/]\n");
-                        break;
-                }
-                _characterUI.DisplayCharacterInfo(unit);
-                _db.SaveChanges();
+                    }
+                    else
+                    {
+                        AnsiConsole.MarkupLine($"[Red]{unit.Name} is already max level! ({Config.CHARACTER_LEVEL_MAX})[/]\n");
+                    }
+                    break;
+                default:
+                    AnsiConsole.MarkupLine($"[White]{unit.Name} remains the same level[/]\n");
+                    break;
             }
-            else
-            {
-                AnsiConsole.MarkupLine($"[Red]{unit.Name} is already max level! ({Config.CHARACTER_LEVEL_MAX})[/]\n");
-            }
+            _characterUI.DisplayCharacterInfo(unit);
+            _db.SaveChanges();
         }
         else
         {

@@ -1,12 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 using w9_assignment_ksteph.DataTypes;
 using w9_assignment_ksteph.Models.Interfaces.ItemBehaviors;
-using w9_assignment_ksteph.Models.Items;
 using w9_assignment_ksteph.Services.DataHelpers;
 
 namespace w9_assignment_ksteph.Models.Items.WeaponItems;
 
-public class EquippableItem : Item, IEquippableItem
+public abstract class EquippableItem : Item, IEquippableItem
 {
     // Item is a class that holds item information.
 
@@ -23,6 +22,11 @@ public class EquippableItem : Item, IEquippableItem
     public int Range { get; set; }
     public int Weight { get; set; }
     public int ExpModifier { get; set; }
+
+    protected EquippableItem()
+    {
+        
+    }
 
     public EquippableItem(string id, string name, WeaponType weaponType, WeaponRank requiredRank, int maxDurability, int might, int hit, int crit, int range, int weight, int expModifier) : base(id)
     {
