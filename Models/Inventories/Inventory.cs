@@ -12,7 +12,7 @@ public class Inventory
     // The Inventory class holds a list of items.
     [JsonIgnore]
     public Unit? Unit;
-    public int UnitId { get; set; }
+    public virtual int UnitId { get; set; }
     public virtual List<Item>? Items { get; set; } = new();
 
     public Inventory()
