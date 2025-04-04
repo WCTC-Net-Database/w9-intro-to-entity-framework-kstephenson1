@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Spectre.Console;
+﻿using Spectre.Console;
 using w9_assignment_ksteph.Models.Combat;
 using w9_assignment_ksteph.Models.Interfaces;
-using w9_assignment_ksteph.Models.Inventories;
-using w9_assignment_ksteph.Models.Items;
 using w9_assignment_ksteph.Models.Units.Abstracts;
 using W9_assignment_template.Data;
 
@@ -21,26 +18,33 @@ public class CharacterUI
     public void DisplayCharacterInfo(Unit unit) // Displays the character's info
     {
         // Builds a character table with 2 lines: Name, Level and Class.
-        Grid charTable = new Grid().Width(25).AddColumn();
+        Grid charTable = new Grid().Width(30).AddColumn();
         charTable
             .AddRow(new Text(unit.Name).Centered())
                 .AddRow(new Text($"Level {unit.Level} {unit.Class}").Centered());
 
         Stat stat = _db.Stats.FirstOrDefault(s => s.UnitId == unit.UnitId);
         // Builds an hp table that contains the health of the character
-        Grid hpTable = new Grid().Width(15).AddColumn();
+        Grid hpTable = new Grid().Width(25).AddColumn();
         hpTable
             .AddRow(new Text($"Hit Points:").Centered())
                 .AddRow(new Text($"{stat.HitPoints}/{stat.MaxHitPoints}").Centered());
 
         //Creates a table that just says "Inventory:" This may be redesigned later.
-        Grid invHeader = new Grid().Width(25).AddColumns(2);
+        Grid invHeader = new Grid().Width(30).AddColumns(3);
         invHeader
-            .AddRow(new Text($"  MOV: {stat.Movement}").LeftJustified(), new Text($"CON: {unit.Stat.Constitution}").LeftJustified())
-            .AddRow(new Text($"  STR: {stat.Strength}").LeftJustified(), new Text($"MAG: {unit.Stat.Magic}").LeftJustified())
-            .AddRow(new Text($"  DEX: {stat.Dexterity}").LeftJustified(), new Text($"SPD: {unit.Stat.Speed}").LeftJustified())
-            .AddRow(new Text($"  DEF: {stat.Defense}").LeftJustified(), new Text($"RES: {unit.Stat.Resistance}").LeftJustified())
-            .AddRow(new Text($"  LCK: {stat.Luck}").LeftJustified());
+            .AddRow(
+                new Text($" STR: {stat.Strength}").LeftJustified(),
+                new Text($"MAG: {unit.Stat.Magic}").LeftJustified(),
+                new Text($"CON: {unit.Stat.Constitution}").LeftJustified())
+            .AddRow(
+                new Text($" DEX: {stat.Dexterity}").LeftJustified(),
+                new Text($"SPD: {unit.Stat.Speed}").LeftJustified(),
+                new Text($"LCK: {unit.Stat.Luck}").LeftJustified())
+            .AddRow(
+                new Text($" DEF: {stat.Defense}").LeftJustified(),
+                new Text($"RES: {unit.Stat.Resistance}").LeftJustified(),
+                new Text($"MOV: {unit.Stat.Movement}").LeftJustified());
 
 
         // Creates an inventory table that lists all the items in the character's inventory.
@@ -52,14 +56,14 @@ public class CharacterUI
 
         //Inventory inventory = _db.Inventories.FirstOrDefault(i => i.UnitId == unit.UnitId);
         var items = from i in _db.Items
-                    where i.InventoryId == unit.InventoryId
+                    where i.InventoryId == unit.Inventory.InventoryId
                     select i;
 
         if (items.Count() != 0)
         {
             foreach (IItem item in items!)
             {
-                invTable.AddRow(item.Name);
+                invTable.AddRow(item.ToString());
             }
         }
         else
