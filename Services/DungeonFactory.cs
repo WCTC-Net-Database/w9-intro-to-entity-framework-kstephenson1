@@ -1,6 +1,5 @@
 ﻿using w9_assignment_ksteph.DataTypes;
 using w9_assignment_ksteph.Models.Dungeons;
-using w9_assignment_ksteph.Models.Interfaces.Rooms;
 using w9_assignment_ksteph.Models.Rooms;
 using w9_assignment_ksteph.Models.UI.Menus.InteractiveMenus;
 
