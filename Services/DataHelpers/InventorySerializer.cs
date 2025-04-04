@@ -102,11 +102,11 @@ public class InventorySerializer
             //"book" => new ItemBook(),
             "lockpick" => new ItemLockpick(),
 
-            "shield" => new Item(itemString),
-            "robe" => new Item(itemString),
-            "horse" => new Item(itemString),
-            "cloak" => new Item(itemString),
-            "armor" => new Item(itemString),
+            "shield" => new GenericItem(itemString),
+            "robe" => new GenericItem(itemString),
+            "horse" => new GenericItem(itemString),
+            "cloak" => new GenericItem(itemString),
+            "armor" => new GenericItem(itemString),
 
             _ => throw new ArgumentOutOfRangeException($"Item name out of range when converting from json: {itemString}")
         };
