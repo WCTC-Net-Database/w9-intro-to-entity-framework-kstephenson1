@@ -15,7 +15,7 @@ public class CharacterUI
         _db = context;
     }
 
-    public void DisplayCharacterInfo(Unit unit) // Displays the character's info
+    public void DisplayCharacterInfo(IUnit unit) // Displays the character's info
     {
         // Builds a character table with 2 lines: Name, Level and Class.
         Grid charTable = new Grid().Width(30).AddColumn();

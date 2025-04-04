@@ -1,5 +1,8 @@
-﻿using w9_assignment_ksteph.Models.Interfaces;
+﻿using w9_assignment_ksteph.Models.Combat;
+using w9_assignment_ksteph.Models.Interfaces;
+using w9_assignment_ksteph.Models.Units.Abstracts;
 using w9_assignment_ksteph.Services;
+using W9_assignment_template.Data;
 
 namespace w9_assignment_ksteph.Models.UI.Menus.InteractiveMenus;
 
@@ -9,11 +12,11 @@ public class UnitSelectionMenu : InteractiveSelectionMenu<IUnit>
     // The MainMenu contains items that have 4 parts, the index, the name, the description, and the action that
     // is completed when that menu item is chosen.
 
-    private readonly UnitManager _unitManager;
+    private readonly GameContext _db;
 
-    public UnitSelectionMenu(UnitManager unitManager)
+    public UnitSelectionMenu(GameContext context)
     {
-        _unitManager = unitManager;
+        _db = context;
     }
 
     public override IUnit Display(string prompt, string exitMessage   )
@@ -37,11 +40,29 @@ public class UnitSelectionMenu : InteractiveSelectionMenu<IUnit>
     {
         _menuItems = new();
 
-        // Adds all the characters to the unit list using green letters.
-        foreach (IUnit unit in _unitManager.Characters.Units)
+        List<Unit> units = _db.Units.ToList();
+        List<Stat> stats = _db.Stats.ToList();
+        List<Unit> characters = new();
+        List<Unit> monsters = new();
+        foreach(Unit unit in units)
         {
+            if (unit.UnitType.Contains("Enemy"))
+                {
+                monsters.Add(unit);
+            }
+            else
+            {
+                characters.Add(unit);
+            }
+        }
+
+        // Adds all the characters to the unit list using green letters.
+        foreach (IUnit unit in characters)
+        {
+            Stat stat = stats.FirstOrDefault(s => s.UnitId == unit.UnitId);
+
             // Strikethrough and dim the unit info if the unit is not alive.
-            if (unit.Stat.HitPoints <= 0)
+            if (stat.HitPoints <= 0)
             {
                 AddMenuItem($"[green][dim][strikethrough]{unit.Name} Level {unit.Level} {unit.Class}[/][/][/]", $" {unit.GetHealthBar()}", unit);
             }
@@ -51,9 +72,11 @@ public class UnitSelectionMenu : InteractiveSelectionMenu<IUnit>
             }
         }
         // Adds all the monsters to the unit list using red letters.
-        foreach (IUnit unit in _unitManager.Monsters.Units)
+        foreach (IUnit unit in monsters)
         {
-            if (unit.Stat.HitPoints <= 0)
+            Stat stat = stats.FirstOrDefault(s => s.UnitId == unit.UnitId);
+
+            if (stat.HitPoints <= 0)
             {
                 // Strikethrough and dim the unit info if the unit is not alive.
                 AddMenuItem($"[red][dim][strikethrough]{unit.Name} Level {unit.Level} {unit.Class}[/][/][/]", $" {unit.GetHealthBar()}", unit);

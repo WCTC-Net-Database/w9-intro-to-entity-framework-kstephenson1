@@ -9,6 +9,7 @@ namespace w9_assignment_ksteph.Models.Interfaces;
 public interface IUnit : ITargetable, IAttack, IHaveInventory, IUseItems
 {
     // Interface tha allows units to exist.
+    public int UnitId { get; set; }
     MoveCommand MoveCommand { set; get; }
     public string Name { get; set; }
     public string Class { get; set; }

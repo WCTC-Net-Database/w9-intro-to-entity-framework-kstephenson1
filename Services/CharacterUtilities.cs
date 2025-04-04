@@ -3,6 +3,7 @@
 using Spectre.Console;
 using w9_assignment_ksteph.Configuration;
 using w9_assignment_ksteph.Models.Combat;
+using w9_assignment_ksteph.Models.Interfaces;
 using w9_assignment_ksteph.Models.Interfaces.Rooms;
 using w9_assignment_ksteph.Models.Inventories;
 using w9_assignment_ksteph.Models.Items;
@@ -20,15 +21,17 @@ public class CharacterUtilities
     private LevelUpMenu _levelUpMenu;
     private RoomMenu _roomMenu;
     private UnitClassMenu _unitClassMenu;
+    private UnitSelectionMenu _unitSelectionMenu;
     // CharacterFunctions class contains fuctions that manipulate characters based on user input.
 
-    public CharacterUtilities(CharacterUI characterUI, GameContext db, UnitClassMenu unitClassMenu, LevelUpMenu levelUpMenu, RoomMenu roomMenu)
+    public CharacterUtilities(CharacterUI characterUI, GameContext db, UnitClassMenu unitClassMenu, LevelUpMenu levelUpMenu, RoomMenu roomMenu, UnitSelectionMenu unitSelectionMenu)
     {
         _characterUI = characterUI;
         _db = db;
         _levelUpMenu = levelUpMenu;
         _roomMenu = roomMenu;
         _unitClassMenu = unitClassMenu;
+        _unitSelectionMenu = unitSelectionMenu;
     }
     public void NewCharacter() // Creates a new character.  Asks for name, class, level, hitpoints, and items.
     {
@@ -96,10 +99,11 @@ public class CharacterUtilities
         return (T) input;
     }
 
-    public void FindCharacter() // Asks the user for a name and displays a character based on input.
+    public void FindCharacterByName() // Asks the user for a name and displays a character based on input.
     {
         string characterName = Input.GetString("What is the name of the character you would like to search for? ");
         Unit character = FindCharacterByName(characterName)!;
+
         Console.Clear();
 
         if (character != null)
@@ -112,9 +116,25 @@ public class CharacterUtilities
         }
     }
 
+    public void FindCharacterByList() // Asks the user for a name and displays a character based on input.
+    {
+        IUnit unit = _unitSelectionMenu.Display("Select unit to view.", "[[Cancel Character Search]]");
+
+        Console.Clear();
+
+        if (unit != null)
+        {
+            _characterUI.DisplayCharacterInfo(unit);
+        }
+        else
+        {
+            AnsiConsole.MarkupLine($"[White]Character search cancelled.\n[/]");
+        }
+    }
+
     private Unit? FindCharacterByName(string name) // Finds and returns a character based on input.
     {
-        var unit = _db.Units.Where(c => c.Name.ToUpper() == name.ToUpper()).FirstOrDefault();
+        Unit unit = _db.Units.Where(c => c.Name.ToUpper() == name.ToUpper()).FirstOrDefault();
         return unit;
     }
 
@@ -165,10 +185,56 @@ public class CharacterUtilities
         }
     }
 
+    public void LevelUpByList() //Asks the user for a character to level up, then displays that character.
+    {
+        IUnit unit = _unitSelectionMenu.Display("Select unit to view.", "[[Cancel Level Up/Down]]");
+        Console.Clear();
+
+        if (unit != null)
+        {
+            int levelModifier = _levelUpMenu.Display($"Choose how to change the level for {unit.Name}", "Go Back");
+            _db.Units.Update(unit as Unit);
+            switch (levelModifier)
+            {
+                case -1:
+                    if (unit.Level > 1)
+                    {
+                        unit.Level += levelModifier;
+                        AnsiConsole.MarkupLine($"[Yellow]Yikes! {unit.Name} has been demoted to level {unit.Level}[/]\n");
+                    }
+                    else
+                    {
+                        AnsiConsole.MarkupLine($"[Red]{unit.Name} is level one and cannot go down another level![/]\n");
+                    }
+                    break;
+                case 1:
+                    if (unit.Level < Config.CHARACTER_LEVEL_MAX)
+                    {
+                        unit.Level += levelModifier;
+                        AnsiConsole.MarkupLine($"[Green]Congratulations! {unit.Name} has reached level {unit.Level}[/]\n");
+                    }
+                    else
+                    {
+                        AnsiConsole.MarkupLine($"[Red]{unit.Name} is already max level! ({Config.CHARACTER_LEVEL_MAX})[/]\n");
+                    }
+                    break;
+                default:
+                    AnsiConsole.MarkupLine($"[White]{unit.Name} remains the same level[/]\n");
+                    break;
+            }
+            _characterUI.DisplayCharacterInfo(unit);
+            _db.SaveChanges();
+        }
+        else
+        {
+            AnsiConsole.MarkupLine($"[White]Level up cancelled.[/]\n");
+        }
+    }
+
     public void DisplayCharacters()                       //Displays each c's information.
     {
         Console.Clear();
-        var units = _db.Units.ToList();
+        List<Unit> units = _db.Units.ToList();
 
         foreach (Unit unit in units)
         {

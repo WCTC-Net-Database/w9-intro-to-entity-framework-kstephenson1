@@ -43,10 +43,12 @@ public class MainMenu : InteractiveMenu
         _menuItems = new();
         AddMenuItem("Display Characters", "Displays all characters and items in their inventory.", _characterUtilities.DisplayCharacters);
         AddMenuItem("Display Rooms", "Displays all rooms and their descriptions.", _roomUI.DisplayRooms);
-        AddMenuItem("Find Character", "Finds an existing character by name.", _characterUtilities.FindCharacter);
+        AddMenuItem("Find Character my Name", "Finds an existing character by name.", _characterUtilities.FindCharacterByName);
+        AddMenuItem("Find Character by List", "Shows a list of units to select from", _characterUtilities.FindCharacterByList);
         AddMenuItem("New Character", "Creates a new character.", _characterUtilities.NewCharacter);
         AddMenuItem("New Room", "Creates a new room.", _roomFactory.CreateRoomAndAddToContext);
-        AddMenuItem("Level Up Chracter", "Levels an existing character.", _characterUtilities.LevelUp);
+        AddMenuItem("Edit Character Level", "Level up/down a selected character.", _characterUtilities.LevelUp);
+        AddMenuItem("Edit Character Level by List", "Level up/down a selected character.", _characterUtilities.LevelUpByList);
         //AddMenuItem("Change File Format", "Changes the file format between Csv and Json", _unitFileManager.SwitchFileType);
         AddMenuItem(exitMessage, "", DoNothing);
         BuildTable(exitMessage);
