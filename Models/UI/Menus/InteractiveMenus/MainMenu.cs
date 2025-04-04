@@ -1,5 +1,5 @@
 ﻿using w9_assignment_ksteph.FileIO;
-using w9_assignment_ksteph.Models.UI.Menus;
+using w9_assignment_ksteph.Models.UI.Character;
 using w9_assignment_ksteph.Models.Units.Abstracts;
 using w9_assignment_ksteph.Services;
 
@@ -12,11 +12,13 @@ public class MainMenu : InteractiveMenu
     private CharacterUtilities _characterUtilities;
     private FileManager<Unit> _unitFileManager;
     private RoomFactory _roomFactory;
-    public MainMenu(CharacterUtilities characterUtilities, FileManager<Unit> unitFileManager, RoomFactory roomFactory)
+    private RoomUI _roomUI;
+    public MainMenu(CharacterUtilities characterUtilities, FileManager<Unit> unitFileManager, RoomFactory roomFactory, RoomUI roomUI)
     {
         _characterUtilities = characterUtilities;
         _unitFileManager = unitFileManager;
         _roomFactory = roomFactory;
+        _roomUI = roomUI;
     }
     public void AddMenuItem(string name, string desc, Action action)
     {
@@ -39,12 +41,13 @@ public class MainMenu : InteractiveMenu
     public override void Update(string exitMessage)
     {
         _menuItems = new();
-        AddMenuItem("Display All Characters", "Displays all characters and items in their inventory.", _characterUtilities.DisplayCharacters);
+        AddMenuItem("Display Characters", "Displays all characters and items in their inventory.", _characterUtilities.DisplayCharacters);
+        AddMenuItem("Display Rooms", "Displays all rooms and their descriptions.", _roomUI.DisplayRooms);
         AddMenuItem("Find Character", "Finds an existing character by name.", _characterUtilities.FindCharacter);
         AddMenuItem("New Character", "Creates a new character.", _characterUtilities.NewCharacter);
         AddMenuItem("New Room", "Creates a new room.", _roomFactory.CreateRoomAndAddToContext);
         AddMenuItem("Level Up Chracter", "Levels an existing character.", _characterUtilities.LevelUp);
-        AddMenuItem("Change File Format", "Changes the file format between Csv and Json", _unitFileManager.SwitchFileType);
+        //AddMenuItem("Change File Format", "Changes the file format between Csv and Json", _unitFileManager.SwitchFileType);
         AddMenuItem(exitMessage, "", DoNothing);
         BuildTable(exitMessage);
     }
