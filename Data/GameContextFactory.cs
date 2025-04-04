@@ -13,7 +13,7 @@ namespace W9_assignment_template.Data
             var configuration = ConfigurationHelper.GetConfiguration();
 
             // Get connection string
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = configuration.GetConnectionString("DbConnection");
 
             // Build DbContextOptions
             var optionsBuilder = new DbContextOptionsBuilder<GameContext>();

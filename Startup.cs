@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NReco.Logging.File;
 using w9_assignment_ksteph.Models.UI.Menus;
-using w9_assignment_ksteph;
 using W9_assignment_template.Data;
 using W9_assignment_template.Helpers;
 using w9_assignment_ksteph.FileIO;
@@ -13,6 +12,7 @@ using w9_assignment_ksteph.Models.UI.Menus.InteractiveMenus;
 using w9_assignment_ksteph.Models.UI;
 using w9_assignment_ksteph.Models.Units.Abstracts;
 using w9_assignment_ksteph.Services;
+using w9_assignment_ksteph.Data;
 
 namespace W9_assignment_template;
 
@@ -45,7 +45,7 @@ public static class Startup
         // Register DbContext with dependency injection
         services.AddDbContext<GameContext>(options =>
             options
-                .UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+                .UseSqlServer(configuration.GetConnectionString("DbConnection"))
                 .UseLazyLoadingProxies()
         );
 
@@ -67,7 +67,10 @@ public static class Startup
         services.AddTransient<LevelUpMenu>();
         services.AddTransient<MainMenu>();
         services.AddTransient<RoomFactory>();
+        services.AddTransient<RoomMenu>();
         services.AddTransient<RoomNavigationMenu>();
+        services.AddTransient<RoomUI>();
+        services.AddTransient<SeedHandler>();
         services.AddSingleton<UnitClassMenu>();
         services.AddSingleton<UnitManager>();
         services.AddTransient<UnitSelectionMenu>();
