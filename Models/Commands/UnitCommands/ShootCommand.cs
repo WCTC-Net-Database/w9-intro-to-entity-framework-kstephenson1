@@ -13,6 +13,10 @@ public class ShootCommand : ICommand
     private readonly IUnit _unit;
     private readonly IUnit _target;
     private readonly Encounter _encounter;
+    public ShootCommand()
+    {
+        
+    }
     public ShootCommand(IUnit unit, IUnit target)
     {
         _unit = unit;

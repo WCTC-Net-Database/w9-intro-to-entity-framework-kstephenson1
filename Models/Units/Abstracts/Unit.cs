@@ -16,11 +16,12 @@ using w9_assignment_ksteph.Models.Rooms;
 
 namespace w9_assignment_ksteph.Models.Units.Abstracts;
 
-public class Unit : IUnit, ITargetable, IAttack, IHaveInventory
+public abstract class Unit : IUnit, ITargetable, IAttack, IHaveInventory
 {
     // Unit is an abstract class that holds basic unit properties and functions.
     [Key]
     public int UnitId { get; set; }
+    public abstract string UnitType { get; set; }
 
     [Name("Name")]                                          // CsvHelper Attribute
     public virtual string Name { get; set; }
@@ -80,7 +81,7 @@ public class Unit : IUnit, ITargetable, IAttack, IHaveInventory
 
     public Unit()
     {
-        Inventory.Unit = this;
+        
     }
 
     public Unit(string name, string characterClass, int level, Inventory inventory)

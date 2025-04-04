@@ -3,7 +3,7 @@ using w9_assignment_ksteph.Models.Inventories;
 
 namespace w9_assignment_ksteph.Models.Units.Abstracts;
 
-public class Monster : Unit
+public abstract class Monster : Unit
 {
     // The Monster class is, for the most part, an abstract(ish) class that might contain some computer intelligence functions one day.
     public Monster() { }

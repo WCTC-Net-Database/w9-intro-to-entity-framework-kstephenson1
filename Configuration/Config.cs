@@ -8,22 +8,6 @@ public static class Config
     // Added this config file to add changable aspects of the program.  Could (and probably should) be changed to a .config file at a later date.
 
     /* * * * * * * * * * * * * * * * *
-     *        SERVER SETTINGS        *
-     * * * * * * * * * * * * * * * * */
-
-    // The data source for the SQL server.
-    public const string SQL_SERVER_ADDRESS = "bitsql.wctc.edu";
-
-    // The name of the database in the SQL server listed above.
-    public const string SQL_DATABASE_NAME = "kstephenson1_20023_ConsoleGame";
-
-    // SQL Database username.
-    public const string SQL_DATABASE_USERNAME = "kstephenson1";
-
-    // SQL Database password with really poor "encryption" if you even want to call it that.
-    public const int SQL_DATABASE_PASSWORD_ENCRYPTED = 1802596849;
-
-    /* * * * * * * * * * * * * * * * *
      *       CHARACTER SETTINGS      *
      * * * * * * * * * * * * * * * * */
 

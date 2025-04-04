@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using CsvHelper.Configuration.Attributes;
 using w9_assignment_ksteph.Models.Combat;
 using w9_assignment_ksteph.Models.Commands.UnitCommands;
@@ -10,7 +11,7 @@ namespace w9_assignment_ksteph.Models.Units.Monsters;
 
 public class EnemyGhost : Monster, IFlyable
 {
-    // A Ghost unit that is able fly.
+    public override string UnitType { get; set; } = "EnemyGhost";
     public EnemyGhost()
     {
 
@@ -23,7 +24,8 @@ public class EnemyGhost : Monster, IFlyable
 
     [Ignore]
     [JsonIgnore]
-    public FlyCommand FlyCommand { get ; set ; } = null!;
+    [NotMapped]
+    public virtual FlyCommand FlyCommand { get ; set ; } = null!;
 
     public void Fly()
     {

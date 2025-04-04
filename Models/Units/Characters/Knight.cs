@@ -6,11 +6,13 @@ namespace w9_assignment_ksteph.Models.Units.Characters;
 
 public class Knight : Character
 {
-    // An Fighter unit that is able to fight.
+    public override string UnitType { get; set; } = "Knight";
+
     public Knight()
     {
 
     }
+
     public Knight(string name, string characterClass, int level, int hitPoints, Inventory inventory, Stat stats)
     {
         

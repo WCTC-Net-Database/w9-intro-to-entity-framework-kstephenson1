@@ -8,6 +8,11 @@ public class MoveCommand : ICommand
     // The MoveCommand takes in a unit and a position, checks to see if the unit can move, then moves to that position of able.
 
     private readonly IUnit _unit;
+    public MoveCommand()
+    {
+        
+    }
+
     public MoveCommand(IUnit unit)
     {
         _unit = unit;

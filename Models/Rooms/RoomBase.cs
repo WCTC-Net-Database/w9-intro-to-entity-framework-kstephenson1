@@ -10,7 +10,7 @@ public abstract class RoomBase : IRoom
     public int RoomId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public List<Unit>? Units { get; set; } = new();
+    public virtual List<Unit>? Units { get; set; } = new();
     //public List<AdjacentRoom> AdjacentRooms { get; set; } = new();
 
     protected RoomBase(string name, string description)

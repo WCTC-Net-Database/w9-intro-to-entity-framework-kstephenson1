@@ -13,7 +13,7 @@ public class Inventory
     [JsonIgnore]
     public Unit? Unit;
     public int UnitId { get; set; }
-    public List<Item>? Items { get; set; } = new();
+    public virtual List<Item>? Items { get; set; } = new();
 
     public Inventory()
     {

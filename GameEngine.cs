@@ -64,6 +64,7 @@ public class GameEngine
             foreach (Room room in rooms)
             {
                 _db.Rooms.Add(room);
+                _db.SaveChanges();
             }
             _db.SaveChanges();
         }

@@ -6,7 +6,7 @@ namespace w9_assignment_ksteph.Models.Units.Monsters;
 
 public class EnemyGoblin : Monster
 {
-    // A Goblin unit that has no special implementation. . . yet?
+    public override string UnitType { get; set; } = "EnemyGoblin";
     public EnemyGoblin()
     {
 

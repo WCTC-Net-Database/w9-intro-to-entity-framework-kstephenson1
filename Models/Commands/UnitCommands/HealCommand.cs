@@ -13,6 +13,10 @@ public class HealCommand : ICommand
     private readonly IUnit _unit;
     private readonly IUnit _target;
     private readonly Encounter _encounter;
+    public HealCommand()
+    {
+        
+    }
     public HealCommand(IUnit unit, IUnit target)
     {
         _unit = unit;

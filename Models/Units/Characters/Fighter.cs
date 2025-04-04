@@ -6,6 +6,8 @@ namespace w9_assignment_ksteph.Models.Units.Characters;
 
 public class Fighter : Character
 {
+    public override string UnitType { get; set; } = "Figher";
+
     public Fighter()
     {
 

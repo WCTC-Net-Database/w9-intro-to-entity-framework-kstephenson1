@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using CsvHelper.Configuration.Attributes;
 using w9_assignment_ksteph.Models.Combat;
 using w9_assignment_ksteph.Models.Commands.UnitCommands;
@@ -11,7 +12,7 @@ namespace w9_assignment_ksteph.Models.Units.Monsters;
 
 public class EnemyCleric : Monster, ICleric
 {
-    // An Cleric unit that is able to heal and cast spells.
+    public override string UnitType { get; set; } = "EnemyCleric";
     public EnemyCleric()
     {
 
@@ -24,11 +25,13 @@ public class EnemyCleric : Monster, ICleric
 
     [Ignore]
     [JsonIgnore]
-    public HealCommand HealCommand { get; set; } = null!;
+    [NotMapped]
+    public virtual HealCommand HealCommand { get; set; } = null!;
 
     [Ignore]
     [JsonIgnore]
-    public CastCommand CastCommand { get; set; } = null!;
+    [NotMapped]
+    public virtual CastCommand CastCommand { get; set; } = null!;
 
     public void Heal(IUnit target)
     {

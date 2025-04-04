@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using CsvHelper.Configuration.Attributes;
 using w9_assignment_ksteph.Models.Combat;
 using w9_assignment_ksteph.Models.Commands.UnitCommands;
@@ -11,7 +12,7 @@ namespace w9_assignment_ksteph.Models.Units.Monsters;
 
 public class EnemyArcher : Monster, IArcher
 {
-    // An Archer unit that is able to shoot.
+    public override string UnitType { get; set; } = "EnemyArcher";
 
     public EnemyArcher()
     {
@@ -25,7 +26,8 @@ public class EnemyArcher : Monster, IArcher
 
     [Ignore]
     [JsonIgnore]
-    public ShootCommand ShootCommand { get; set; }
+    [NotMapped]
+    public virtual ShootCommand ShootCommand { get; set; }
 
     public void Shoot(IUnit target)
     {

@@ -10,7 +10,7 @@ public class Item : IItem
     // Item is a class that holds item information.
     public int ItemId { get; set; }
     [JsonIgnore]
-    public Inventory Inventory { get; set; }
+    public virtual Inventory Inventory { get; set; }
     public int InventoryId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }

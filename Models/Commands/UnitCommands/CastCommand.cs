@@ -10,6 +10,10 @@ public class CastCommand : ICommand
 
     private readonly IUnit _unit;
     private readonly string _spellName;
+    public CastCommand()
+    {
+        
+    }
     public CastCommand(IUnit unit, string spellName)
     {
         _unit = unit;

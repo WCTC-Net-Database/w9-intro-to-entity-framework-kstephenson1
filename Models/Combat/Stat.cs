@@ -10,7 +10,7 @@ public class Stat
     public int UnitId { get; set; }
 
     // Navigation
-    public Unit Unit { get; set; }
+    public virtual Unit Unit { get; set; }
 
     // Health Stats
     public int HitPoints  { get; set; }         //  HP

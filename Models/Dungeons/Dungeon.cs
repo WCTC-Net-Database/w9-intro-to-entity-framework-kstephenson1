@@ -10,7 +10,7 @@ public class Dungeon
     private RoomNavigationMenu _roomNavigationMenu;
     public string Name { get; set; }
     public string Description { get; set; }
-    public Room StartingRoom { get; set; }
+    public virtual Room StartingRoom { get; set; }
     public Dungeon()
     {
         

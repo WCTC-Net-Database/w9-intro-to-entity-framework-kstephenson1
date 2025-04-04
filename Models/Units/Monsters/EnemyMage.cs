@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using CsvHelper.Configuration.Attributes;
 using w9_assignment_ksteph.Models.Combat;
 using w9_assignment_ksteph.Models.Commands.UnitCommands;
@@ -10,7 +11,7 @@ namespace w9_assignment_ksteph.Models.Units.Monsters;
 
 public class EnemyMage : Monster, IMage
 {
-    // A Mage unit that is able to cast spells.
+    public override string UnitType { get; set; } = "EnemyMage";
     public EnemyMage()
     {
 
@@ -23,7 +24,8 @@ public class EnemyMage : Monster, IMage
 
     [Ignore]
     [JsonIgnore]
-    public CastCommand CastCommand { get; set; } = null!;
+    [NotMapped]
+    public virtual CastCommand CastCommand { get; set; } = null!;
 
     public void Cast(string spellName)
     {
